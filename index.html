@@ -1,0 +1,1298 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#2f6fed">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Урокум — готовые материалы к каждому уроку. Демо-прототип для учителя начальных классов.">
+<title>Урокум — демо</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232f6fed'/%3E%3Ctext x='32' y='44' font-size='34' text-anchor='middle' fill='white' font-family='Arial' font-weight='700'%3EУ%3C/text%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#f4f6fb; --card:#fff; --ink:#1b2333; --muted:#5a6476; --line:#e2e6ef;
+  --pri:#2f6fed; --pri-d:#1f56c8; --pri-soft:#e9f0ff; --acc:#f5a524; --acc-soft:#fff4dc;
+  --ok:#1f9d55; --ok-soft:#e2f6ea; --bad:#d64545; --bad-soft:#fdeaea;
+  --red:#e5484d; --blue:#3b82f6; --green:#22a06b; --orange:#f08c2e; --purple:#8e5cd9; --teal:#0f9b9b; --yellow:#f2b705;
+  --r:16px; --nav-h:64px;
+  color-scheme: light;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:17px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans","Helvetica Neue",Arial,sans-serif;
+  -webkit-tap-highlight-color:transparent}
+button{font:inherit;color:inherit;cursor:pointer}
+h1,h2,h3,p{margin:0}
+.wrap{max-width:560px;margin:0 auto}
+
+/* ---------- шапка ---------- */
+.hdr{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);border-bottom:1px solid var(--line);
+  padding-top:env(safe-area-inset-top);backdrop-filter:saturate(1.4) blur(8px);-webkit-backdrop-filter:saturate(1.4) blur(8px)}
+.hdr .wrap{display:flex;align-items:center;gap:6px;height:56px;padding:0 8px}
+.icon-btn{width:44px;height:44px;min-width:44px;border:0;background:transparent;border-radius:12px;display:grid;place-items:center}
+.icon-btn:active{background:var(--pri-soft)}
+.icon-btn svg{width:26px;height:26px}
+.hdr-title{flex:1;min-width:0;font-weight:700;font-size:18px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pill-demo{flex:none;background:var(--acc-soft);color:#8a5a00;border:1px solid #f3d38c;font-size:13px;font-weight:700;
+  padding:3px 8px;border-radius:999px}
+.lang{flex:none;display:flex;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.lang button{border:0;background:#fff;min-width:44px;min-height:44px;font-size:15px;font-weight:700;color:var(--muted);padding:0 6px}
+.lang button.on{background:var(--pri);color:#fff}
+
+/* ---------- контент ---------- */
+main{padding:16px 16px calc(var(--nav-h) + 28px + env(safe-area-inset-bottom))}
+main.no-nav{padding-bottom:calc(28px + env(safe-area-inset-bottom))}
+.stack>*+*{margin-top:12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px;overflow-wrap:anywhere}
+.card.tight{padding:12px}
+.muted{color:var(--muted)}
+.small{font-size:15px}
+.xs{font-size:13px}
+.h1{font-size:24px;font-weight:800;line-height:1.2}
+.h2{font-size:20px;font-weight:800;line-height:1.25}
+.h3{font-size:17px;font-weight:700}
+.eyebrow{font-size:14px;font-weight:700;color:var(--pri);text-transform:uppercase;letter-spacing:.04em}
+.row{display:flex;align-items:center;gap:10px}
+.between{justify-content:space-between;flex-wrap:wrap}
+.wrap-row{display:flex;flex-wrap:wrap;gap:8px}
+.note{background:var(--acc-soft);border:1px solid #f3d38c;border-radius:12px;padding:12px;font-size:15px}
+.note.blue{background:var(--pri-soft);border-color:#c9d8ff}
+.sep{height:1px;background:var(--line);margin:12px 0}
+
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:52px;border-radius:14px;
+  border:1px solid var(--line);background:#fff;font-weight:700;font-size:17px;padding:10px 16px;text-align:center}
+.btn:active{transform:scale(.99)}
+.btn:disabled{opacity:.45}
+.btn.pri{background:var(--pri);border-color:var(--pri);color:#fff}
+.btn.pri:active{background:var(--pri-d)}
+.btn.ok{background:var(--ok-soft);border-color:#b7e4c7;color:#126b3a}
+.btn.ghost{background:transparent}
+.btn.sm{min-height:44px;font-size:15px;width:auto;padding:8px 14px}
+.btn svg{width:22px;height:22px;flex:none}
+.link-btn{border:0;background:none;color:var(--pri);font-weight:700;min-height:44px;padding:0 4px}
+
+.seg{display:flex;background:#eceff6;border-radius:14px;padding:4px;gap:4px}
+.seg button{flex:1;min-width:0;border:0;background:transparent;border-radius:11px;min-height:44px;font-weight:700;font-size:16px;color:var(--muted);padding:6px 8px}
+.seg button.on{background:#fff;color:var(--ink);box-shadow:0 1px 3px rgba(20,30,60,.15)}
+.seg.wrap2 button{font-size:14px;line-height:1.2}
+
+.chip{display:inline-flex;align-items:center;gap:6px;border-radius:999px;background:var(--pri-soft);color:var(--pri-d);
+  font-weight:700;font-size:14px;padding:4px 10px}
+.chip.gray{background:#eef0f5;color:var(--muted)}
+.chip.ok{background:var(--ok-soft);color:#126b3a}
+
+.std{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-top:1px solid var(--line)}
+.std:first-child{border-top:0;padding-top:4px}
+.std .code{flex:none;font-weight:800;color:var(--pri-d);background:var(--pri-soft);border-radius:8px;padding:2px 8px;font-size:14px;margin-top:2px}
+.std .txt{font-size:15px}
+
+/* ---------- плитки ---------- */
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tile{display:flex;flex-direction:column;align-items:flex-start;gap:6px;text-align:left;min-height:118px;
+  background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:12px;min-width:0}
+.tile:active{background:var(--pri-soft)}
+.tile .ic{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;color:#fff}
+.tile .ic svg{width:24px;height:24px}
+.tile b{font-size:16px;line-height:1.2}
+.tile span{font-size:13px;color:var(--muted);line-height:1.25}
+.tile .letter{font-size:12px;color:var(--muted);font-weight:700;margin-left:auto}
+
+/* ---------- нижнее меню ---------- */
+.nav{position:fixed;left:0;right:0;bottom:0;z-index:20;background:#fff;border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom)}
+.nav .wrap{display:grid;grid-template-columns:repeat(4,1fr)}
+.nav button{border:0;background:transparent;min-height:var(--nav-h);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
+  font-size:12.5px;font-weight:700;color:var(--muted);padding:6px 2px;min-width:0}
+.nav button svg{width:26px;height:26px}
+.nav button.on{color:var(--pri)}
+.nav button span{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* ---------- онбординг ---------- */
+.steps{display:flex;gap:6px;margin-bottom:16px}
+.steps i{flex:1;height:6px;border-radius:3px;background:#dfe3ec}
+.steps i.on{background:var(--pri)}
+.opt{display:flex;align-items:center;gap:14px;width:100%;text-align:left;border:2px solid var(--line);background:#fff;border-radius:var(--r);
+  padding:14px;min-height:72px}
+.opt.on{border-color:var(--pri);background:var(--pri-soft)}
+.opt .big{width:48px;height:48px;flex:none;border-radius:14px;display:grid;place-items:center;font-weight:800;font-size:22px;background:#eef2fb;color:var(--pri-d)}
+.opt.on .big{background:var(--pri);color:#fff}
+.opt b{display:block;font-size:18px}
+.grades{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.grades .opt{flex-direction:column;justify-content:center;text-align:center;min-height:96px}
+.subjects{display:flex;flex-wrap:wrap;gap:8px}
+.subjects button{min-height:48px;border:2px solid var(--line);background:#fff;border-radius:999px;padding:8px 16px;font-weight:700;font-size:16px}
+.subjects button.on{border-color:var(--pri);background:var(--pri-soft);color:var(--pri-d)}
+.logo{display:flex;align-items:center;gap:12px}
+.logo .mark{width:52px;height:52px;border-radius:16px;background:var(--pri);color:#fff;display:grid;place-items:center;font-weight:900;font-size:28px}
+
+/* ---------- сегодня ---------- */
+.lesson-card{border:2px solid var(--pri);}
+.topic-title{font-size:23px;font-weight:800;line-height:1.2}
+.pages{display:flex;flex-wrap:wrap;gap:6px 12px;font-size:15px;color:var(--muted)}
+.progress{height:10px;border-radius:5px;background:#e6e9f1;overflow:hidden}
+.progress i{display:block;height:100%;background:var(--ok);border-radius:5px}
+
+/* ---------- содержание ---------- */
+.part-h{font-weight:800;color:var(--muted);font-size:14px;text-transform:uppercase;letter-spacing:.05em;margin:20px 4px 8px}
+.sec{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.sec+.sec{margin-top:10px}
+.sec-h{padding:12px 14px;font-weight:800;background:#f8f9fc;border-bottom:1px solid var(--line);font-size:16px}
+.trow{display:flex;align-items:center;gap:10px;width:100%;border:0;border-top:1px solid var(--line);background:#fff;text-align:left;min-height:52px;padding:8px 12px}
+.trow:first-of-type{border-top:0}
+.trow:active{background:var(--pri-soft)}
+.trow .st{width:26px;height:26px;flex:none;border-radius:50%;display:grid;place-items:center;border:2px solid #cfd5e2}
+.trow .st svg{width:16px;height:16px}
+.trow.done .st{background:var(--ok);border-color:var(--ok);color:#fff}
+.trow.done .tt{color:var(--muted)}
+.trow.today{background:#f0f5ff}
+.trow.today .st{border-color:var(--pri);background:var(--pri)}
+.trow.today .st::after{content:"";width:8px;height:8px;border-radius:50%;background:#fff}
+.trow .tt{flex:1;min-width:0;font-size:16px}
+.trow .pg{flex:none;font-size:14px;color:var(--muted)}
+.trow .chev{flex:none;width:18px;height:18px;color:#a3abbd}
+
+/* ---------- план ---------- */
+.field{padding:12px 0;border-top:1px solid var(--line)}
+.field:first-child{border-top:0;padding-top:0}
+.field .k{font-size:14px;font-weight:800;color:var(--muted);margin-bottom:4px}
+.field ul,.steps-list{margin:0;padding-left:20px}
+.field li,.steps-list li{margin:4px 0}
+.timebar{display:flex;height:14px;border-radius:7px;overflow:hidden;margin:8px 0 4px}
+.timebar i{display:block;height:100%}
+.acc{border:1px solid var(--line);border-radius:14px;background:#fff;overflow:hidden}
+.acc+.acc{margin-top:8px}
+.acc-h{display:flex;align-items:center;gap:10px;width:100%;border:0;background:#fff;text-align:left;min-height:56px;padding:10px 12px}
+.acc-h .n{width:30px;height:30px;flex:none;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:800;font-size:15px}
+.acc-h .nm{flex:1;min-width:0;font-weight:700;font-size:16px;line-height:1.25}
+.acc-h .mn{flex:none;font-weight:800;font-size:14px;background:#eef0f5;border-radius:999px;padding:3px 9px}
+.acc-h .chev{width:20px;height:20px;flex:none;transition:transform .2s;color:#8b94a7}
+.acc.open .acc-h .chev{transform:rotate(90deg)}
+.acc-b{display:none;padding:0 14px 14px 52px;font-size:16px}
+.acc.open .acc-b{display:block}
+.acc-b .form{font-size:14px;color:var(--muted);margin-bottom:4px}
+.crit{padding:12px 0;border-top:1px solid var(--line)}
+.crit:first-child{border-top:0;padding-top:0}
+.crit ol{margin:6px 0 0;padding-left:0;list-style:none;font-size:15px}
+.crit li{display:flex;gap:8px;margin:4px 0}
+.crit li b{flex:none;width:30px;color:var(--pri-d)}
+
+/* ---------- слайды ---------- */
+.slides{position:relative}
+.track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;border-radius:var(--r);-webkit-overflow-scrolling:touch}
+.track::-webkit-scrollbar{display:none}
+.slide{flex:0 0 100%;scroll-snap-align:center;scroll-snap-stop:always;aspect-ratio:16/9;background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.slide svg{display:block;width:100%;height:100%}
+.slide-ctrl{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:10px}
+.slide-ctrl .icon-btn{background:#fff;border:1px solid var(--line);width:52px;height:52px}
+.dots{display:flex;justify-content:center;gap:6px;margin-top:8px}
+.dots i{width:8px;height:8px;border-radius:50%;background:#cdd3e0}
+.dots i.on{background:var(--pri);width:20px;border-radius:4px}
+.try-g{cursor:pointer}
+.try-g .s{opacity:0;transition:opacity .2s}
+.try-g.on .s{opacity:1}
+.try-g.on .q{opacity:0}
+
+/* ---------- листы ---------- */
+.sheet-head{display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap}
+.task{padding:14px 0;border-top:1px dashed #d6dbe6}
+.task:first-of-type{border-top:0}
+.task-q{display:flex;gap:10px;align-items:flex-start}
+.task-q .num{flex:none;width:30px;height:30px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font-weight:800;font-size:15px}
+.task-q .qt{flex:1;min-width:0;font-weight:700}
+.items{display:flex;flex-wrap:wrap;gap:10px 18px;margin:10px 0 0 40px}
+.item{display:flex;align-items:center;gap:8px;font-size:20px;font-weight:700;min-height:44px;flex-wrap:wrap}
+.item.text{font-size:17px;font-weight:600;width:100%}
+.blank{display:inline-grid;place-items:center;min-width:38px;height:38px;border:2px dashed #9aa4b8;border-radius:50%;padding:0 6px;font-weight:800;color:var(--ok)}
+.blank.box{border-radius:8px}
+.blank .fill{visibility:hidden}
+.circ{display:inline-grid;place-items:center;min-width:42px;height:42px;border-radius:50%;border:2px solid transparent;padding:0 4px}
+.item.pair{background:#f3f5fa;border:1px solid var(--line);border-radius:14px;padding:2px 8px;gap:4px}
+.show-ans .circ.yes{border-color:var(--ok);background:var(--ok-soft);color:#126b3a}
+.show-ans .blank{border-style:solid;border-color:var(--ok);background:var(--ok-soft)}
+.show-ans .blank .fill{visibility:visible}
+.ans{display:none;color:#126b3a;background:var(--ok-soft);border-radius:10px;padding:6px 10px;font-size:15px;font-weight:700;margin-top:6px;width:100%}
+.ans .nt{font-weight:500;color:#2c6e47}
+.show-ans .ans{display:block}
+.pic{display:inline-flex;align-items:center;max-width:100%}
+.pic svg{max-width:100%;height:auto}
+
+/* ---------- карточки групп ---------- */
+.gcard{border-radius:var(--r);overflow:hidden;background:#fff;border:1px solid var(--line)}
+.gcard+.gcard{margin-top:12px}
+.gcard .gh{color:#fff;padding:10px 14px;font-weight:800;display:flex;justify-content:space-between;gap:8px}
+.gcard .gb{padding:14px}
+
+/* ---------- инфографика ---------- */
+.poster{background:linear-gradient(180deg,#fff, #f6f9ff);border:2px solid var(--pri);border-radius:20px;padding:16px}
+.istep{display:flex;gap:12px;align-items:flex-start;padding:14px 0;border-top:2px dashed #cfdaf5}
+.istep:first-of-type{border-top:0}
+.istep .bn{flex:none;width:44px;height:44px;border-radius:14px;background:var(--pri);color:#fff;display:grid;place-items:center;font-weight:900;font-size:22px}
+.istep .bd{flex:1;min-width:0}
+.istep .pic{margin-top:8px}
+.signs3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center}
+.signs3 div{background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px 4px}
+.signs3 b{display:block;font-size:30px;line-height:1.1}
+
+/* ---------- игра ---------- */
+.game{background:linear-gradient(170deg,#1d2a6b,#3a2a85);color:#fff;border-radius:20px;padding:16px;min-height:420px}
+.game .muted{color:#c8cdf2}
+.ladder{display:grid;grid-template-columns:repeat(10,1fr);gap:4px;margin:6px 0 14px}
+.ladder i{height:10px;border-radius:5px;background:rgba(255,255,255,.22)}
+.ladder i.ok{background:#41d686}
+.ladder i.bad{background:#ff6b6b}
+.ladder i.cur{background:#ffd34d}
+.gq{font-size:21px;font-weight:800;line-height:1.3;margin:6px 0 10px}
+.gpic{background:#fff;border-radius:14px;padding:8px;display:flex;justify-content:center;margin-bottom:12px}
+.gopts{display:grid;gap:10px}
+.gopt{display:flex;align-items:center;gap:12px;min-height:56px;border-radius:16px;border:2px solid rgba(255,255,255,.35);background:rgba(255,255,255,.08);
+  color:#fff;text-align:left;padding:8px 14px;font-size:20px;font-weight:700}
+.gopt .lt{flex:none;width:32px;height:32px;border-radius:50%;background:#ffd34d;color:#1d2a6b;display:grid;place-items:center;font-size:16px;font-weight:900}
+.gopt.ok{background:#1f9d55;border-color:#41d686}
+.gopt.bad{background:#c73b3b;border-color:#ff8a8a}
+.gopt.gone{visibility:hidden}
+.gopt:disabled{cursor:default}
+.lifes{display:flex;gap:10px;margin-top:14px}
+.life{flex:1;min-height:48px;border-radius:14px;border:2px solid #ffd34d;background:transparent;color:#ffd34d;font-weight:800;font-size:16px}
+.life:disabled{opacity:.35}
+.ghint{background:rgba(255,211,77,.15);border:1px solid rgba(255,211,77,.5);border-radius:12px;padding:10px;margin-top:12px;font-size:16px}
+.gfb{margin-top:12px;font-weight:800;font-size:18px}
+.btn.yellow{background:#ffd34d;border-color:#ffd34d;color:#1d2a6b}
+.score-big{font-size:46px;font-weight:900;line-height:1;margin:10px 0 4px;color:#ffd34d}
+.pop{animation:pop .5s ease}
+@keyframes pop{0%{transform:scale(.85)}60%{transform:scale(1.06)}100%{transform:scale(1)}}
+
+/* ---------- проверка ---------- */
+.opts3{display:flex;flex-wrap:wrap;gap:6px 16px;margin:8px 0 0 40px;font-size:17px}
+.opts3 span b{color:var(--muted)}
+.opts3 span.right{color:#126b3a;font-weight:800}
+.crit-h{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center;padding:12px 0 4px;border-top:2px solid var(--line);margin-top:6px}
+.keygrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(64px,1fr));gap:8px}
+.keygrid div{border:1px solid var(--line);border-radius:12px;padding:8px 4px;text-align:center;font-size:14px;color:var(--muted)}
+.keygrid b{display:block;font-size:22px;color:#126b3a}
+.paper{background:#fff;border:1px solid #cfd5e2;border-radius:6px;box-shadow:0 2px 10px rgba(20,30,60,.08);padding:14px}
+.paper-top{display:flex;gap:12px;justify-content:space-between;align-items:flex-start}
+.paper-top .qr{flex:none;width:96px;height:96px}
+.paper-top .qr svg{width:100%;height:100%;display:block}
+.fill-line{border-bottom:1px solid #9aa4b8;min-height:30px;font-size:14px;color:var(--muted);display:flex;align-items:flex-end;padding-bottom:2px}
+.bubbles{display:grid;grid-template-columns:1fr;gap:6px 18px;margin-top:12px}
+.bubbles.two{grid-template-columns:1fr 1fr;grid-auto-flow:column}
+.brow{display:flex;align-items:center;gap:6px;font-weight:700;font-size:15px}
+.brow .bn{width:24px;text-align:right;flex:none}
+.brow i{width:28px;height:28px;border:2px solid #556;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:13px;font-weight:700;color:#556}
+.scan-box{position:relative;border-radius:18px;overflow:hidden;background:#1b2333;aspect-ratio:3/4;max-height:380px;margin:0 auto;width:100%}
+.scan-box .sheet{position:absolute;inset:12% 16%;background:#fff;border-radius:6px;transform:rotate(-3deg)}
+.scan-box .sheet::before{content:"";position:absolute;inset:10% 10% auto 10%;height:60%;background:repeating-linear-gradient(180deg,#e3e7ef 0 6px,transparent 6px 18px)}
+.scan-box .qrm{position:absolute;right:8%;top:5%;width:22%;aspect-ratio:1;background:#1b2333;border-radius:2px}
+.scan-box .frame{position:absolute;inset:8% 10%;border:3px solid rgba(255,255,255,.85);border-radius:14px}
+.scan-box .line{position:absolute;left:10%;right:10%;height:3px;background:#41d686;box-shadow:0 0 12px #41d686;top:10%;animation:scan 1.1s ease-in-out infinite alternate}
+@keyframes scan{to{top:88%}}
+.scan-box .cnt{position:absolute;left:0;right:0;bottom:12px;text-align:center;color:#fff;font-weight:800}
+.bar{height:12px;border-radius:6px;background:#e6e9f1;overflow:hidden}
+.bar i{display:block;height:100%;border-radius:6px}
+.res{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff}
+.res-h,.res-r{display:grid;grid-template-columns:30px 1fr 74px 96px;gap:6px;align-items:center;padding:8px 10px}
+.res-h{background:#f6f7fb;font-size:13px;font-weight:800;color:var(--muted)}
+.res-r{width:100%;border:0;border-top:1px solid var(--line);background:#fff;text-align:left;min-height:48px;font-size:15px}
+.res-r .nm{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600}
+.res-r .num{text-align:center;font-weight:700}
+.badge.lvl{white-space:normal;line-height:1.15}
+.res.lv .res-h,.res.lv .res-r{grid-template-columns:26px 1fr 52px 112px}
+.badge{display:inline-block;border-radius:999px;padding:3px 8px;font-size:13px;font-weight:800;text-align:center;white-space:nowrap}
+.m5{background:#dcf5e6;color:#0f6b37}.m4{background:#e2ecff;color:#1f4fb3}.m3{background:#fff1d6;color:#8a5a00}.m2{background:#fde2e2;color:#a12a2a}
+.lv-green{background:#dcf5e6;color:#0f6b37}.lv-blue{background:#e2ecff;color:#1f4fb3}.lv-orange{background:#fff1d6;color:#8a5a00}.lv-red{background:#fde2e2;color:#a12a2a}
+.det{display:none;padding:8px 10px 12px;background:#fafbfd;border-top:1px dashed var(--line);font-size:14px}
+.det.open{display:block}
+.det .cells{display:grid;grid-template-columns:repeat(10,1fr);gap:4px;margin:6px 0}
+.det .cells span{border-radius:6px;text-align:center;padding:3px 0;font-weight:700;font-size:13px}
+.det .cells .y{background:var(--ok-soft);color:#126b3a}
+.det .cells .n{background:var(--bad-soft);color:#a12a2a}
+.dist{display:grid;grid-template-columns:auto 1fr 28px;gap:8px 10px;align-items:center;font-size:15px}
+.kpis{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.kpi{background:#f6f8fc;border-radius:12px;padding:10px}
+.kpi b{display:block;font-size:22px}
+.names{display:flex;flex-wrap:wrap;gap:6px}
+.names span{background:#eef0f5;border-radius:999px;padding:4px 10px;font-size:14px}
+
+/* ---------- скачать ---------- */
+.dl-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:12px 0;border-top:1px solid var(--line)}
+.dl-row:first-child{border-top:0;padding-top:0}
+.dl-row .nm{flex:1 1 160px;min-width:0;font-weight:700}
+.dl-row .fm{display:flex;gap:6px;flex-wrap:wrap}
+.fmt{min-height:44px;min-width:64px;border-radius:12px;border:1px solid var(--line);background:#fff;font-weight:800;font-size:14px;padding:6px 10px}
+.fmt.word{color:#1f56c8}.fmt.pdf{color:#c0392b}.fmt.ppt{color:#c55a11}.fmt.png{color:#0f8a5f}.fmt.link{color:#6b3fc1}
+
+/* ---------- модалка, тост ---------- */
+.modal{position:fixed;inset:0;z-index:50;background:rgba(15,20,35,.45);display:flex;align-items:flex-end;justify-content:center;padding:16px;padding-bottom:calc(16px + env(safe-area-inset-bottom))}
+.modal .box{background:#fff;border-radius:20px;padding:20px;max-width:520px;width:100%;animation:up .2s ease}
+@keyframes up{from{transform:translateY(20px);opacity:.5}}
+.toast{position:fixed;left:16px;right:16px;bottom:calc(var(--nav-h) + 14px + env(safe-area-inset-bottom));z-index:40;max-width:520px;margin:0 auto;
+  background:#1b2333;color:#fff;border-radius:14px;padding:12px 16px;font-size:15px;box-shadow:0 6px 20px rgba(0,0,0,.2);animation:up .2s ease}
+.hidden{display:none !important}
+</style>
+</head>
+<body>
+<header class="hdr">
+  <div class="wrap">
+    <button class="icon-btn" id="backBtn" data-act="back" aria-label="Назад">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>
+    </button>
+    <div class="hdr-title" id="hdrTitle">Урокум</div>
+    <span class="pill-demo" id="demoPill">Демо</span>
+    <div class="lang" role="group" aria-label="Язык">
+      <button data-act="lang" data-v="ru" id="langRu">RU</button>
+      <button data-act="lang" data-v="az" id="langAz">AZ</button>
+    </div>
+  </div>
+</header>
+<main id="app" class="wrap"></main>
+<nav class="nav" id="nav">
+  <div class="wrap">
+    <button data-go="/today" data-tab="today"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/><circle cx="12" cy="15.5" r="2" fill="currentColor"/></svg><span id="navToday">Сегодня</span></button>
+    <button data-go="/toc" data-tab="toc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5M8 8h8M8 12h6"/></svg><span id="navToc">Содержание</span></button>
+    <button data-go="/pack" data-tab="pack"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="8" rx="2"/><rect x="3" y="13" width="8" height="8" rx="2"/><rect x="13" y="13" width="8" height="8" rx="2"/></svg><span id="navPack">Пакет</span></button>
+    <button data-go="/check" data-tab="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 3v2h6V3M8.5 12.5l2.2 2.2 4.8-4.8"/></svg><span id="navCheck">Проверка</span></button>
+  </div>
+</nav>
+<div id="layer"></div>
+
+<script id="content" type="application/json">{"meta":{"title":"Урокум — демо","version":"демо 1 · 20.10.2026","grade":1,"subject_ru":"Математика","subject_az":"Riyaziyyat","sector":"RU","textbook_ru":"Учебник «Математика. 1 класс» (2020, гриф 2020-004)","textbook_az":"«Riyaziyyat. 1-ci sinif» dərsliyi (2020, qrif 2020-004)"},"toc":[{"no":1,"part":1,"ru":"Признак предмета","az":"Əşyanın əlaməti","items":[{"no":"1","ru":"Место предмета","p":8,"id":"t00","sec":1,"part":1,"pages":"8–10"},{"no":"2","ru":"Признак предмета","p":11,"id":"t01","sec":1,"part":1,"pages":"11–13"},{"no":"","ru":"Обобщающие задания","p":14,"id":"t02","sec":1,"part":1,"pages":"14–15"}]},{"no":2,"part":1,"ru":"Числа (до 10)","az":"Ədədlər (10-a qədər)","items":[{"no":"3","ru":"Счёт до 10","p":16,"id":"t03","sec":2,"part":1,"pages":"16–17"},{"no":"4","ru":"Числа 0, 1 и 2","p":18,"id":"t04","sec":2,"part":1,"pages":"18–19"},{"no":"5","ru":"Числа 3, 4 и 5","p":20,"id":"t05","sec":2,"part":1,"pages":"20–21"},{"no":"","ru":"Задачи","p":22,"id":"t06","sec":2,"part":1,"pages":"22"},{"no":"6","ru":"Числа 6, 7 и 8","p":23,"id":"t07","sec":2,"part":1,"pages":"23–24"},{"no":"7","ru":"Числа 9 и 10","p":25,"id":"t08","sec":2,"part":1,"pages":"25–26"},{"no":"8","ru":"Порядковые номера","p":27,"id":"t09","sec":2,"part":1,"pages":"27–28"},{"no":"","ru":"Обобщающие задания","p":29,"id":"t10","sec":2,"part":1,"pages":"29"}]},{"no":3,"part":1,"ru":"Сравнение чисел","az":"Ədədlərin müqayisəsi","items":[{"no":"9","ru":"Больше, меньше","p":30,"id":"t11","sec":3,"part":1,"pages":"30–32"},{"no":"10","ru":"Сравнение чисел","az":"Ədədlərin müqayisəsi","p":33,"full":true,"wb":"26","std":["1-1.1.5","1-2.1.2"],"id":"t12","sec":3,"part":1,"pages":"33–34"},{"no":"11","ru":"Числовая ось","az":"Ədəd oxu","p":35,"wb":"28","std":["1-1.1.3"],"id":"t13","sec":3,"part":1,"pages":"35–36"},{"no":"12","ru":"Упорядочивание","p":37,"id":"t14","sec":3,"part":1,"pages":"37–39"},{"no":"","ru":"Обобщающие задания","p":40,"id":"t15","sec":3,"part":1,"pages":"40–41"}]},{"no":4,"part":1,"ru":"Сложение (до 10)","az":"Toplama (10-a qədər)","items":[{"no":"13","ru":"Тройка чисел","p":42,"id":"t16","sec":4,"part":1,"pages":"42–45"},{"no":"14","ru":"Добавить, увеличить","p":46,"id":"t17","sec":4,"part":1,"pages":"46–47"},{"no":"15","ru":"Сложение чисел","p":48,"id":"t18","sec":4,"part":1,"pages":"48–50"},{"no":"","ru":"Задачи","p":51,"id":"t19","sec":4,"part":1,"pages":"51"},{"no":"16","ru":"Сложение на числовой оси","p":52,"id":"t20","sec":4,"part":1,"pages":"52–53"},{"no":"17","ru":"Выражения с тремя слагаемыми","p":54,"id":"t21","sec":4,"part":1,"pages":"54–55"},{"no":"18","ru":"Другие способы сложения","p":56,"id":"t22","sec":4,"part":1,"pages":"56–58"},{"no":"","ru":"Обобщающие задания","p":59,"id":"t23","sec":4,"part":1,"pages":"59"}]},{"no":5,"part":1,"ru":"Вычитание (до 10)","az":"Çıxma (10-a qədər)","items":[{"no":"19","ru":"Уменьшить, вычесть","p":60,"id":"t24","sec":5,"part":1,"pages":"60–62"},{"no":"20","ru":"Вычитание чисел","p":63,"id":"t25","sec":5,"part":1,"pages":"63–65"},{"no":"","ru":"Задачи","p":66,"id":"t26","sec":5,"part":1,"pages":"66"},{"no":"21","ru":"Вычитание на числовой оси","p":67,"id":"t27","sec":5,"part":1,"pages":"67–68"},{"no":"22","ru":"Связь сложения и вычитания","p":69,"id":"t28","sec":5,"part":1,"pages":"69–71"},{"no":"23","ru":"Нахождение неизвестного","p":72,"id":"t29","sec":5,"part":1,"pages":"72–74"},{"no":"","ru":"Обобщающие задания","p":75,"id":"t30","sec":5,"part":1,"pages":"75–77"}]},{"no":6,"part":1,"ru":"Числа (до 20)","az":"Ədədlər (20-yə qədər)","end":89,"items":[{"no":"24","ru":"Счёт до 20","p":78,"id":"t31","sec":6,"part":1,"pages":"78–79"},{"no":"25","ru":"Счёт в прямом и обратном порядке","p":80,"id":"t32","sec":6,"part":1,"pages":"80–81"},{"no":"26","ru":"Десятки и единицы","p":82,"id":"t33","sec":6,"part":1,"pages":"82–83"},{"no":"","ru":"Задачи","p":84,"id":"t34","sec":6,"part":1,"pages":"84"},{"no":"27","ru":"Сравнение чисел","p":85,"id":"t35","sec":6,"part":1,"pages":"85–86"},{"no":"28","ru":"Упорядочивание","p":87,"id":"t36","sec":6,"part":1,"pages":"87–88"},{"no":"","ru":"Обобщающие задания","p":89,"id":"t37","sec":6,"part":1,"pages":"89"}]},{"no":7,"part":2,"ru":"Геометрические фигуры","az":"Həndəsi fiqurlar","items":[{"no":"29","ru":"Треугольник, круг, квадрат, прямоугольник","p":6,"id":"t38","sec":7,"part":2,"pages":"6–7"},{"no":"30","ru":"Пространственные фигуры","p":8,"id":"t39","sec":7,"part":2,"pages":"8–9"},{"no":"31","ru":"Целое, половина","p":10,"id":"t40","sec":7,"part":2,"pages":"10–11"},{"no":"","ru":"Обобщающие задания","p":12,"id":"t41","sec":7,"part":2,"pages":"12–13"}]},{"no":8,"part":2,"ru":"Сложение (до 20)","az":"Toplama (20-yə qədər)","items":[{"no":"32","ru":"Сложение чисел","p":14,"id":"t42","sec":8,"part":2,"pages":"14–15"},{"no":"33","ru":"Сложение дополнением до 10","p":16,"id":"t43","sec":8,"part":2,"pages":"16–17"},{"no":"","ru":"Решите задачи","p":18,"id":"t44","sec":8,"part":2,"pages":"18"},{"no":"34","ru":"Другие способы сложения","p":19,"id":"t45","sec":8,"part":2,"pages":"19–21"},{"no":"","ru":"Обобщающие задания","p":22,"id":"t46","sec":8,"part":2,"pages":"22"}]},{"no":9,"part":2,"ru":"Вычитание (до 20)","az":"Çıxma (20-yə qədər)","items":[{"no":"35","ru":"Вычитание чисел","p":23,"id":"t47","sec":9,"part":2,"pages":"23–25"},{"no":"36","ru":"Вычитание уменьшением до 10","p":26,"id":"t48","sec":9,"part":2,"pages":"26–28"},{"no":"","ru":"Решите задачи","p":29,"id":"t49","sec":9,"part":2,"pages":"29"},{"no":"37","ru":"Связь сложения и вычитания","p":30,"id":"t50","sec":9,"part":2,"pages":"30–32"},{"no":"","ru":"Решите задачи","p":33,"id":"t51","sec":9,"part":2,"pages":"33"},{"no":"","ru":"Обобщающие задания","p":34,"id":"t52","sec":9,"part":2,"pages":"34–35"}]},{"no":10,"part":2,"ru":"Числа (до 100). Деньги","az":"Ədədlər (100-ə qədər). Pul","items":[{"no":"38","ru":"Числа (до 100)","p":36,"id":"t53","sec":10,"part":2,"pages":"36–38"},{"no":"39","ru":"Десятки и единицы","p":39,"id":"t54","sec":10,"part":2,"pages":"39–40"},{"no":"40","ru":"Гяпик, манат","p":41,"id":"t55","sec":10,"part":2,"pages":"41–42"},{"no":"41","ru":"Покупка-продажа","p":43,"id":"t56","sec":10,"part":2,"pages":"43–44"},{"no":"","ru":"Обобщающие задания","p":45,"id":"t57","sec":10,"part":2,"pages":"45–47"}]},{"no":11,"part":2,"ru":"Измерение","az":"Ölçmə","items":[{"no":"42","ru":"Длинный, короткий","p":48,"id":"t58","sec":11,"part":2,"pages":"48–50"},{"no":"43","ru":"Сантиметр","p":51,"id":"t59","sec":11,"part":2,"pages":"51–52"},{"no":"44","ru":"Тяжёлый, лёгкий","p":53,"id":"t60","sec":11,"part":2,"pages":"53–54"},{"no":"45","ru":"Ёмкость","p":55,"id":"t61","sec":11,"part":2,"pages":"55–56"},{"no":"","ru":"Решите задачи","p":57,"id":"t62","sec":11,"part":2,"pages":"57"},{"no":"46","ru":"День, неделя, месяц","p":58,"id":"t63","sec":11,"part":2,"pages":"58–60"},{"no":"47","ru":"Часы","p":61,"id":"t64","sec":11,"part":2,"pages":"61–62"},{"no":"","ru":"Обобщающие задания","p":63,"id":"t65","sec":11,"part":2,"pages":"63"}]},{"no":12,"part":2,"ru":"Представление информации","az":"Məlumatın təqdimi","end":73,"items":[{"no":"48","ru":"Таблица, пиктограмма","p":64,"id":"t66","sec":12,"part":2,"pages":"64–66"},{"no":"","ru":"Решите задачи","p":67,"id":"t67","sec":12,"part":2,"pages":"67"},{"no":"49","ru":"Диаграммы","p":68,"id":"t68","sec":12,"part":2,"pages":"68–69"},{"no":"","ru":"Обобщающие задания","p":70,"id":"t69","sec":12,"part":2,"pages":"70–71"},{"no":"","ru":"Обобщающие задания за 1-й класс","p":72,"id":"t70","sec":12,"part":2,"pages":"72–73"}]}],"lesson":{"no":"10","topic_ru":"Сравнение чисел","topic_az":"Ədədlərin müqayisəsi","part":1,"pages":"33–34","workbook_pages":"26","standards":["1-1.1.5","1-2.1.2"],"next_standards":["1-1.1.3"],"plan":{"fields":[{"k":"f_topic","v":"10. Сравнение чисел. Учебник, ч. 1, с. 33–34; рабочая тетрадь, с. 26."},{"k":"f_standards","std":["1-1.1.5","1-2.1.2"],"v":"Программа 2024. В методичке 2020 у урока код 1.1.6 (старая нумерация)."},{"k":"f_goals","list":["Сравнивает две группы предметов, составляя пары, и говорит «больше», «меньше», «равно».","Записывает результат сравнения чисел до 10 знаками >, <, =.","Объясняет, почему одно число больше другого: по парам, по счёту или по числовой оси."]},{"k":"f_integration","v":"Русский язык — большие и маленькие буквы (сравнение по размеру); Познание мира — сравнение предметов по размеру; Изобразительное искусство — большие и маленькие предметы на рисунке."},{"k":"f_form","v":"Коллективная, в парах, в группах, индивидуальная."},{"k":"f_methods","v":"Игра «Голодный крокодил», составление пар (один к одному), моделирование кубиками, «Найди ошибку», самооценка «Светофор»."},{"k":"f_equipment","v":"Учебник (с. 33–34), рабочая тетрадь (с. 26), карточки с кружками от 1 до 10, знаки >, <, = из картона, крокодил на палочке, кубики или счётные палочки, слайды, рабочие листы A/B/C, карточки для групп."}],"stages":[{"st":"st_1","min":5,"form":"коллективная","steps":["Учитель держит в одной руке 3 пуговицы, в другой — 5: «В какой руке больше? Как проверить, не пересчитывая?»","Дети предлагают разложить пуговицы парами. Где остались пуговицы без пары — там больше.","Проблемный вопрос: «Как записать „пять больше трёх“ коротко, без слов?»"]},{"st":"st_2","min":10,"form":"в парах","steps":["Каждая пара получает две карточки с кружками (например, 6 и 4) и кубики.","На каждый кружок кладут кубик и выстраивают кубики двух карточек парами.","Находят, где остались кубики без пары, и говорят: «Шесть больше четырёх», «Четыре меньше шести».","Учитель показывает знаки > и < и крокодила: пасть всегда открыта к большему числу (слайды 2–5)."]},{"st":"st_3","min":8,"form":"коллективная","steps":["Пары называют свои числа, учитель записывает на доске: 6 > 4, 4 < 6, 5 = 5. Читаем записи хором.","Вопрос: «Почему 6 > 4 и 4 < 6 — это об одном и том же?»","Учебник, с. 33: дети рассматривают образцы записи и объясняют их своими словами.","Числовая ось на слайде 6: из двух чисел больше то, которое стоит правее."]},{"st":"st_4","min":4,"form":"коллективная","steps":["Больше то число, в группе которого остаются предметы без пары; при счёте его называют позже.","Знак открыт к большему числу, острый уголок смотрит на меньшее.","Если пар хватило всем — числа равны, ставим знак «=»."]},{"st":"st_5","min":10,"form":"индивидуальная, групповая","steps":["Рабочие листы по уровням: A — базовый, B — средний, C — высокий (5 мин).","Учебник, с. 34 — задания по выбору учителя (ответы — в тетради, учебник не подписываем).","Или карточки для групп (2–6 групп): каждая группа объясняет своё задание у доски.","Игра «Миллионер» на доске: 3–4 вопроса всем классом."]},{"st":"st_6","min":5,"form":"индивидуальная","steps":["Самооценка «Светофор» (слайд 8): зелёный — понял и могу объяснить; жёлтый — понял, но нужна помощь; красный — пока не понял.","Учитель отмечает учеников под наблюдением по критериям ниже (уровни I–IV)."]},{"st":"st_7","min":3,"form":"индивидуальная","steps":["Найти дома две группы предметов (ложки и вилки, чашки и блюдца), сравнить их парами и записать 2 сравнения знаками.","Рабочая тетрадь, с. 26 — по выбору учителя."]}],"criteria":[{"c":"Сравнивает две группы предметов, составляя пары (1-1.1.5)","levels":["Не может сравнить группы даже с помощью.","Сравнивает группы с помощью учителя.","Сравнивает группы парами, иногда ошибается.","Сам сравнивает группы и показывает «лишние» предметы."]},{"c":"Записывает сравнение знаками >, <, = (1-2.1.2)","levels":["Путает знаки.","Ставит знак верно только с подсказкой.","Ставит знаки верно, читает запись с ошибками.","Верно ставит и читает знаки: «шесть больше четырёх»."]},{"c":"Объясняет выбор знака (1-1.1.5, 1-2.1.2)","levels":["Не объясняет выбор.","Объясняет по наводящим вопросам.","Объясняет одним способом.","Объясняет двумя способами: парами и по числовой оси."]}],"sources":["Методичка «Математика. 1 класс» (2020, гриф 2020-004), раздел 3, тема 10, с. 60–63: место урока, цели (у нас — своими словами), приём «пасть крокодила», интеграция, страницы учебника и рабочей тетради.","Учебник «Математика. 1 класс», ч. 1, с. 33–34 — только ссылки на страницы, тексты и рисунки не копируем.","Стандарты — программа по математике 2024 (1-1.1.5, 1-2.1.2).","Добавлено нами: ход урока по минутам, критерии I–IV, все задания, рабочие листы, карточки, игра, слайды и рисунки."]},"slides":[{"t":"title","title":"Сравнение чисел","sub":"Математика · 1 класс · урок 10","note":"Покажите крокодила: сегодня он поможет нам сравнивать числа. Спросите, что дети уже знают о словах «больше» и «меньше»."},{"t":"rows","title":"Где больше?","a":5,"ca":"red","b":3,"cb":"blue","text":"Каких кружков больше — красных или синих?","note":"Пусть дети сначала угадают на глаз, а потом предложат способ проверить, не пересчитывая."},{"t":"pairs","title":"Составим пары","a":5,"ca":"red","b":3,"cb":"blue","text":"Двум красным не хватило пары. Красных больше: 5 > 3","note":"Выведите правило: где остались предметы без пары — там больше. Это главный способ урока."},{"t":"signs","title":"Знаки сравнения","rows":[["8 > 3","восемь больше трёх"],["2 < 6","два меньше шести"],["4 = 4","четыре равно четырём"]],"note":"Дети читают записи хором. Обратите внимание: читаем слева направо, как обычный текст."},{"t":"croc","title":"Крокодил ест большее","a":9,"b":4,"text":"Пасть открыта к большему числу: 9 > 4","note":"Покажите крокодила на палочке. Пусть дети по очереди ставят его между числами на доске."},{"t":"axis","title":"Числовая ось подсказывает","marks":[3,7],"text":"Правее — значит больше: 7 > 3","note":"Мостик к следующему уроку «Числовая ось»: числа на оси стоят по порядку, как при счёте."},{"t":"try","title":"Сравни сам","items":[[5,8],[9,2],[6,6]],"note":"Нажмите на кружок — появится знак. Сначала спросите класс, потом откройте ответ."},{"t":"reflect","title":"Как я понял тему?","items":[["green","Понял и могу объяснить"],["yellow","Понял, но нужна помощь"],["red","Пока не понял"]],"note":"Самооценка «Светофор»: дети поднимают карточку нужного цвета. Запишите, кому нужна помощь."}],"worksheets":{"A":{"tasks":[{"q":"Посчитай кружки и поставь знак >, < или =.","std":"1-1.1.5","items":[{"pic":{"t":"dots2","a":4,"b":2},"a":">","v":"sign(4,2)"},{"pic":{"t":"dots2","a":3,"b":3},"a":"=","v":"sign(3,3)"},{"pic":{"t":"dots2","a":1,"b":5},"a":"<","v":"sign(1,5)"}]},{"q":"Поставь знак >, < или =.","std":"1-2.1.2","items":[{"q":"2 ◯ 7","a":"<","v":"sign(2,7)"},{"q":"8 ◯ 3","a":">","v":"sign(8,3)"},{"q":"6 ◯ 6","a":"=","v":"sign(6,6)"},{"q":"0 ◯ 1","a":"<","v":"sign(0,1)"}]},{"q":"Обведи большее число.","std":"1-1.1.5","items":[{"q":"5 и 9","a":"9","v":"str(max(5,9))"},{"q":"7 и 4","a":"7","v":"str(max(7,4))"},{"q":"10 и 8","a":"10","v":"str(max(10,8))"}]},{"q":"Обведи меньшее число.","std":"1-1.1.5","items":[{"q":"3 и 6","a":"3","v":"str(min(3,6))"},{"q":"9 и 2","a":"2","v":"str(min(9,2))"},{"q":"1 и 0","a":"0","v":"str(min(1,0))"}]},{"q":"Нарисуй кружков больше, чем треугольников.","std":"1-1.1.5","items":[{"pic":{"t":"tri","n":3},"a":"4, 5, 6, 7, 8, 9, 10","note":"подойдёт любое из этих чисел","v":"fmt([x for x in R if x > 3])"}]}]},"B":{"tasks":[{"q":"Поставь знак >, < или =.","std":"1-2.1.2","items":[{"q":"7 ◯ 9","a":"<","v":"sign(7,9)"},{"q":"10 ◯ 6","a":">","v":"sign(10,6)"},{"q":"4 ◯ 4","a":"=","v":"sign(4,4)"},{"q":"5 ◯ 8","a":"<","v":"sign(5,8)"},{"q":"9 ◯ 0","a":">","v":"sign(9,0)"},{"q":"3 ◯ 2","a":">","v":"sign(3,2)"}]},{"q":"Верно или неверно? Поставь ✓ или ✗.","std":"1-2.1.2","items":[{"q":"6 > 4","a":"верно","v":"yes_no(true('6 > 4'))"},{"q":"2 > 5","a":"неверно","v":"yes_no(true('2 > 5'))"},{"q":"7 = 7","a":"верно","v":"yes_no(true('7 = 7'))"},{"q":"8 < 3","a":"неверно","v":"yes_no(true('8 < 3'))"},{"q":"1 < 10","a":"верно","v":"yes_no(true('1 < 10'))"}]},{"q":"Впиши в окошко подходящее число (от 0 до 10).","std":"1-1.1.5","items":[{"q":"5 > ▢","a":"0, 1, 2, 3, 4","note":"любое из чисел","v":"fmt([x for x in R if 5 > x])"},{"q":"▢ < 3","a":"0, 1, 2","note":"любое из чисел","v":"fmt([x for x in R if x < 3])"},{"q":"8 = ▢","a":"8","v":"fmt([x for x in R if x == 8])"},{"q":"▢ > 9","a":"10","v":"fmt([x for x in R if x > 9])"}]},{"q":"Запиши числами и знаком.","std":"1-2.1.2","items":[{"q":"Шесть больше двух.","a":"6 > 2","v":"rel(6,2)"},{"q":"Три меньше семи.","a":"3 < 7","v":"rel(3,7)"},{"q":"Пять равно пяти.","a":"5 = 5","v":"rel(5,5)"}]},{"q":"У Лейлы 6 карандашей, у Тимура 4. У кого больше? Запиши сравнение.","std":"1-1.1.5","items":[{"a":"У Лейлы: 6 > 4","v":"('У Лейлы' if 6 > 4 else 'У Тимура') + ': ' + rel(6,4)"}]}]},"C":{"tasks":[{"q":"Поставь знак >, < или =.","std":"1-2.1.2","items":[{"q":"9 ◯ 10","a":"<","v":"sign(9,10)"},{"q":"0 ◯ 0","a":"=","v":"sign(0,0)"},{"q":"7 ◯ 6","a":">","v":"sign(7,6)"},{"q":"2 ◯ 9","a":"<","v":"sign(2,9)"}]},{"q":"Найди ошибки и исправь знак.","std":"1-2.1.2","items":[{"q":"5 < 3","a":"ошибка: 5 > 3","v":"fix('5 < 3')"},{"q":"8 > 6","a":"верно","v":"fix('8 > 6')"},{"q":"4 = 7","a":"ошибка: 4 < 7","v":"fix('4 = 7')"},{"q":"10 > 9","a":"верно","v":"fix('10 > 9')"},{"q":"1 > 2","a":"ошибка: 1 < 2","v":"fix('1 > 2')"}]},{"q":"Какие числа можно вписать в окошко?","std":"1-1.1.5","items":[{"q":"4 < ▢ < 8","a":"5, 6, 7","v":"fmt([x for x in R if 4 < x < 8])"},{"q":"0 < ▢ < 3","a":"1, 2","v":"fmt([x for x in R if 0 < x < 3])"}]},{"q":"Отгадай число.","std":"1-1.1.5","items":[{"q":"Я больше 6, но меньше 8.","a":"7","v":"str(only([x for x in R if 6 < x < 8]))"},{"q":"Я меньше 3, но больше 1.","a":"2","v":"str(only([x for x in R if 1 < x < 3]))"}]},{"q":"У Айсель 7 наклеек, у Мурада 9. Мурад подарил Айсель 1 наклейку. У кого теперь больше? Нарисуй кружки и проверь.","std":"1-1.1.5","items":[{"a":"Поровну: 8 = 8","v":"('Поровну' if 7 + 1 == 9 - 1 else 'Не поровну') + ': ' + rel(7 + 1, 9 - 1)"}]}]}},"cards":[{"title":"Пары","color":"red","std":"1-1.1.5","q":"Нарисуйте 6 яблок и 4 груши. Соедините их парами. Чего больше? Запишите сравнение знаком.","a":"Яблок больше, два яблока остались без пары: 6 > 4","v":"rel(6,4)","vin":"a"},{"title":"Крокодил","color":"green","std":"1-2.1.2","q":"Поставьте между числами знак-крокодила: 3 ◯ 8 · 7 ◯ 7 · 9 ◯ 5.","a":"3 < 8 · 7 = 7 · 9 > 5","v":"' · '.join([rel(3,8), rel(7,7), rel(9,5)])"},{"title":"Числовая ось","color":"blue","std":"1-1.1.5","q":"Начертите ось от 0 до 10. Отметьте числа 2 и 6. Какое число правее? Запишите два сравнения.","a":"6 правее: 6 > 2 и 2 < 6","v":"str(max(2,6)) + ' правее: ' + rel(6,2) + ' и ' + rel(2,6)"},{"title":"Найдите ошибки","color":"orange","std":"1-2.1.2","q":"Какие записи неверные? Исправьте их: 9 < 4 · 3 = 3 · 5 > 8 · 10 > 1.","a":"Неверно: 9 < 4 (надо 9 > 4) и 5 > 8 (надо 5 < 8)","v":"'Неверно: ' + ' и '.join(s + ' (надо ' + rel(int(s.split()[0]), int(s.split()[2])) + ')' for s in ['9 < 4', '3 = 3', '5 > 8', '10 > 1'] if not true(s))"},{"title":"Загадки","color":"purple","std":"1-1.1.5","q":"Отгадайте числа: 1) я больше 4, но меньше 6; 2) я меньше 1; 3) я больше 8, но меньше 10.","a":"1) 5; 2) 0; 3) 9","v":"'1) %d; 2) %d; 3) %d' % (only([x for x in R if 4 < x < 6]), only([x for x in R if x < 1]), only([x for x in R if 8 < x < 10]))"},{"title":"Составьте сами","color":"teal","std":"1-2.1.2","q":"Возьмите карточки с числами 2, 5 и 9. Составьте три верные записи со знаками > или <.","a":"Например: 2 < 5, 5 < 9, 9 > 2. Подходят все пары: 2 < 5, 2 < 9, 5 < 9 и записи с «>» в обратном порядке","v":"', '.join(rel(a, b) for a, b in [(2,5), (5,9), (9,2)])","vin":"a"}],"infographic":{"title":"Как сравнить два числа","steps":[{"n":1,"title":"Посчитай","text":"Сколько предметов в каждой группе?","pic":{"t":"dots2","a":6,"b":4}},{"n":2,"title":"Сравни","text":"Составь пары. Где остались предметы без пары — там больше. На числовой оси большее число стоит правее.","pic":{"t":"pairs","a":6,"b":4}},{"n":3,"title":"Поставь знак","text":"Крокодил открывает пасть к большему числу.","pic":{"t":"croc","a":6,"b":4}}],"signs":[[">","больше"],["<","меньше"],["=","равно"]],"read":[{"e":"6 > 4","w":"шесть больше четырёх","v":"rel(6,4)"},{"e":"4 < 6","w":"четыре меньше шести","v":"rel(4,6)"},{"e":"5 = 5","w":"пять равно пяти","v":"rel(5,5)"}]},"quiz":[{"q":"Какой знак читается «меньше»?","opts":["<",">","=","+"],"a":0,"v":"SIGN['меньше']","hint":"Острый уголок знака смотрит на меньшее число."},{"q":"Каких кружков больше?","pic":{"t":"rows","a":5,"ca":"red","b":3,"cb":"blue"},"opts":["Синих","Красных","Поровну","Нет кружков"],"a":1,"v":"'Красных' if 5 > 3 else 'Синих' if 3 > 5 else 'Поровну'","hint":"Составь пары: красный — синий. Кому не хватило пары?"},{"q":"Какой знак нужен: 6 ◯ 2?","opts":["<","=",">","+"],"a":2,"v":"sign(6,2)","hint":"Крокодил открывает пасть к большему числу."},{"q":"Какой знак нужен: 4 ◯ 9?","opts":[">","=","<","+"],"a":2,"v":"sign(4,9)","hint":"Какое число при счёте называют позже?"},{"q":"Какой знак нужен: 7 ◯ 7?","opts":["<",">","+","="],"a":3,"v":"sign(7,7)","hint":"Числа одинаковые."},{"q":"Какая запись верная?","opts":["3 > 5","8 < 2","6 > 1","4 = 0"],"a":2,"v":"only_true(opts)","hint":"Проверь каждую запись: широкая сторона знака — к большему числу."},{"q":"Какое число меньше 4?","opts":["2","9","6","4"],"a":0,"v":"only([o for o in opts if int(o) < 4])","hint":"4 не меньше 4 — эти числа равны."},{"q":"Я больше 5, но меньше 7. Кто я?","opts":["5","8","7","6"],"a":3,"v":"only([o for o in opts if 5 < int(o) < 7])","hint":"Посчитай: 5, …, 7. Какое число в середине?"},{"q":"На числовой оси число 8 стоит правее числа 3. Что верно?","opts":["8 < 3","8 > 3","8 = 3","3 > 8"],"a":1,"v":"only_true(opts)","hint":"Правее — значит больше."},{"q":"У Нигяр 4 мяча, у Эмиля 6. Что верно?","opts":["У Нигяр больше","Поровну","У Эмиля больше","У Нигяр на 6 больше"],"a":2,"v":"'У Нигяр больше' if 4 > 6 else 'У Эмиля больше' if 6 > 4 else 'Поровну'","hint":"Составь пары из мячей Нигяр и Эмиля."}],"quiz_points":[100,200,300,500,1000,2000,4000,8000,16000,32000],"downloads":[{"ru":"План урока","az":"Dərs planı","fmt":["Word","PDF"]},{"ru":"Слайды","az":"Slaydlar","fmt":["PowerPoint","PDF"]},{"ru":"Рабочие листы A/B/C + ключ","az":"İş vərəqləri A/B/C + cavablar","fmt":["Word","PDF"]},{"ru":"Карточки для групп + ключ","az":"Qrup kartları + cavablar","fmt":["Word","PDF"]},{"ru":"Инфографика A4","az":"İnfoqrafika A4","fmt":["PDF","PNG"]},{"ru":"Проверка по разделу + бланки с QR","az":"Bölmə üzrə yoxlama + QR blankları","fmt":["PDF"]},{"ru":"Игра «Миллионер»","az":"«Milyonçu» oyunu","fmt":["link"]}]},"checks":{"g1":{"label_ru":"1 класс · Проверка по разделу","label_az":"1-ci sinif · Bölmə üzrə yoxlama","title_ru":"Раздел 3. Сравнение чисел","title_az":"Bölmə 3. Ədədlərin müqayisəsi","source_ru":"Учебник «Математика. 1 класс», ч. 1, с. 30–40. Учитель читает вопросы вслух, дети отмечают ответ в бланке.","source_az":"«Riyaziyyat. 1-ci sinif» dərsliyi, 1-ci hissə, səh. 30–40. Müəllim sualları ucadan oxuyur, şagirdlər cavabı blankda qeyd edir.","note_ru":"В 1 классе МСО не проводится — суммативного оценивания нет (методичка «Математика 1», с. 29). Это формативная проверка без отметки: учитель видит, кто что усвоил. Во 2–4 классах здесь будет МСО с оценкой «2»–«5» — посмотрите вкладку «2 класс · МСО-1».","note_az":"1-ci sinifdə KSQ keçirilmir — summativ qiymətləndirmə yoxdur. Bu, qiymət qoyulmayan formativ yoxlamadır. 2–4-cü siniflərdə burada «2»–«5» qiymətli KSQ olacaq — «2-ci sinif · KSQ-1» bölməsinə baxın.","kind":"levels","criteria":[{"id":"K1","std":"1-1.1.5","ru":"Сравнивает и упорядочивает числа","tasks":[1,7,9]},{"id":"K2","std":"1-2.1.2","ru":"Ставит знаки >, <, =","tasks":[2,3,6]},{"id":"K3","std":"1-1.1.3","ru":"Находит место числа на числовой оси","tasks":[4,5,8]}],"levels":[{"min":8,"ru":"высокий","az":"yüksək","c":"green"},{"min":6,"ru":"средний","az":"orta","c":"blue"},{"min":4,"ru":"базовый","az":"əsas","c":"orange"},{"min":0,"ru":"нужна помощь","az":"köməyə ehtiyac var","c":"red"}],"levels_rule_ru":"Уровень по числу верных ответов из 9: 8–9 — высокий, 6–7 — средний, 4–5 — базовый, 0–3 — нужна помощь. Правило наше, для демо; в методичке — смайлики, звёздочки и рубрики.","levels_rule_az":"Səviyyə 9 sualdan düzgün cavabların sayına görə: 8–9 — yüksək, 6–7 — orta, 4–5 — əsas, 0–3 — köməyə ehtiyac var. Qayda demo üçündür.","tasks":[{"n":1,"q":"Где больше точек?","pic":{"t":"dots2","a":6,"b":4},"opts":["слева","справа","поровну"],"a":"а","v":"'слева' if 6 > 4 else 'справа' if 4 > 6 else 'поровну'"},{"n":2,"q":"Какой знак нужен: 3 ◯ 7?","opts":[">","<","="],"a":"б","v":"sign(3,7)"},{"n":3,"q":"Какой знак нужен: 9 ◯ 5?","opts":[">","<","="],"a":"а","v":"sign(9,5)"},{"n":4,"q":"Какое число стоит на числовой оси правее: 4 или 8?","opts":["4","8","они стоят рядом"],"a":"б","v":"str(max(4,8))"},{"n":5,"q":"Какое число стоит на числовой оси между 5 и 7?","opts":["4","8","6"],"a":"в","v":"only([o for o in opts if 5 < int(o) < 7])"},{"n":6,"q":"Какой знак нужен: 6 ◯ 6?","opts":[">","<","="],"a":"в","v":"sign(6,6)"},{"n":7,"q":"Как расставить числа 7, 2, 5 от меньшего к большему?","opts":["2, 5, 7","7, 5, 2","5, 2, 7"],"a":"а","v":"fmt(sorted([7,2,5]))"},{"n":8,"q":"Какое число стоит на оси сразу перед 9?","opts":["10","8","7"],"a":"б","v":"str(9 - 1)"},{"n":9,"q":"Каких кружков меньше?","pic":{"t":"rows","a":3,"ca":"blue","b":5,"cb":"red"},"opts":["синих","красных","поровну"],"a":"а","v":"'синих' if 3 < 5 else 'красных' if 5 < 3 else 'поровну'"}],"review":{"K1":[{"q":"Нарисуй 5 кружков и 3 квадрата. Составь пары. Чего больше?","a":"Кружков больше: 5 > 3","v":"'Кружков больше: ' + rel(5,3)"},{"q":"Обведи большее число: 8 и 6.","a":"8","v":"str(max(8,6))"},{"q":"Обведи меньшее число: 2 и 7.","a":"2","v":"str(min(2,7))"},{"q":"Расставь от меньшего к большему: 9, 3, 6.","a":"3, 6, 9","v":"fmt(sorted([9,3,6]))"}],"K2":[{"q":"4 ◯ 7","a":"<","v":"sign(4,7)"},{"q":"9 ◯ 1","a":">","v":"sign(9,1)"},{"q":"5 ◯ 5","a":"=","v":"sign(5,5)"},{"q":"Запиши числами и знаком: «десять больше восьми».","a":"10 > 8","v":"rel(10,8)"}],"K3":[{"q":"Какое число стоит на оси сразу после 6?","a":"7","v":"str(6 + 1)"},{"q":"Какое число стоит на оси сразу перед 3?","a":"2","v":"str(3 - 1)"},{"q":"Какое число стоит на оси между 8 и 10?","a":"9","v":"str(only([x for x in R if 8 < x < 10]))"},{"q":"Какое число стоит на оси правее: 2 или 5?","a":"5","v":"str(max(2,5))"}]},"qr":"UROKUM DEMO | RU-mat-1 | razdel 3 | blank","answers":["абабвваба","абабвваба","ваабббааа","аббббвава","абабвваба","абваввава","абабвваба","аббвавава","абаббввба","абабввава","абабвваба","абабввабв","вбббввавв","абабвваба","абаббвааа","авабвваба","абавввава","абббаваба","абабббааа","абавввааа","абабвваба","абавбвбаб","авввавваа","ааавбввба"],"qr_svg":{"size":33,"d":"M2 2h7v1h-7zM12 2h3v1h-3zM16 2h2v1h-2zM20 2h3v1h-3zM24 2h7v1h-7zM2 3h1v1h-1zM8 3h1v1h-1zM11 3h1v1h-1zM13 3h1v1h-1zM15 3h1v1h-1zM17 3h3v1h-3zM22 3h1v1h-1zM24 3h1v1h-1zM30 3h1v1h-1zM2 4h1v1h-1zM4 4h3v1h-3zM8 4h1v1h-1zM11 4h4v1h-4zM18 4h3v1h-3zM24 4h1v1h-1zM26 4h3v1h-3zM30 4h1v1h-1zM2 5h1v1h-1zM4 5h3v1h-3zM8 5h1v1h-1zM11 5h2v1h-2zM14 5h1v1h-1zM16 5h2v1h-2zM20 5h3v1h-3zM24 5h1v1h-1zM26 5h3v1h-3zM30 5h1v1h-1zM2 6h1v1h-1zM4 6h3v1h-3zM8 6h1v1h-1zM13 6h1v1h-1zM16 6h2v1h-2zM19 6h1v1h-1zM22 6h1v1h-1zM24 6h1v1h-1zM26 6h3v1h-3zM30 6h1v1h-1zM2 7h1v1h-1zM8 7h1v1h-1zM10 7h1v1h-1zM13 7h3v1h-3zM17 7h1v1h-1zM20 7h2v1h-2zM24 7h1v1h-1zM30 7h1v1h-1zM2 8h7v1h-7zM10 8h1v1h-1zM12 8h1v1h-1zM14 8h1v1h-1zM16 8h1v1h-1zM18 8h1v1h-1zM20 8h1v1h-1zM22 8h1v1h-1zM24 8h7v1h-7zM11 9h3v1h-3zM17 9h1v1h-1zM19 9h1v1h-1zM22 9h1v1h-1zM2 10h1v1h-1zM5 10h1v1h-1zM7 10h2v1h-2zM10 10h1v1h-1zM13 10h1v1h-1zM15 10h3v1h-3zM20 10h2v1h-2zM23 10h1v1h-1zM25 10h1v1h-1zM2 11h2v1h-2zM6 11h1v1h-1zM9 11h1v1h-1zM11 11h2v1h-2zM14 11h2v1h-2zM18 11h2v1h-2zM24 11h1v1h-1zM27 11h3v1h-3zM4 12h5v1h-5zM10 12h2v1h-2zM15 12h2v1h-2zM20 12h5v1h-5zM26 12h1v1h-1zM29 12h1v1h-1zM2 13h1v1h-1zM5 13h2v1h-2zM9 13h1v1h-1zM11 13h1v1h-1zM13 13h1v1h-1zM15 13h1v1h-1zM17 13h1v1h-1zM21 13h1v1h-1zM23 13h1v1h-1zM28 13h1v1h-1zM30 13h1v1h-1zM4 14h1v1h-1zM6 14h3v1h-3zM10 14h1v1h-1zM12 14h1v1h-1zM14 14h2v1h-2zM18 14h2v1h-2zM24 14h1v1h-1zM27 14h3v1h-3zM5 15h1v1h-1zM10 15h1v1h-1zM14 15h2v1h-2zM18 15h6v1h-6zM25 15h1v1h-1zM27 15h1v1h-1zM29 15h2v1h-2zM3 16h6v1h-6zM13 16h1v1h-1zM15 16h2v1h-2zM20 16h1v1h-1zM22 16h1v1h-1zM24 16h1v1h-1zM27 16h1v1h-1zM29 16h2v1h-2zM2 17h3v1h-3zM7 17h1v1h-1zM9 17h1v1h-1zM12 17h1v1h-1zM14 17h2v1h-2zM19 17h1v1h-1zM21 17h1v1h-1zM23 17h1v1h-1zM26 17h1v1h-1zM29 17h2v1h-2zM3 18h1v1h-1zM5 18h2v1h-2zM8 18h1v1h-1zM13 18h2v1h-2zM18 18h2v1h-2zM21 18h3v1h-3zM26 18h3v1h-3zM4 19h2v1h-2zM9 19h2v1h-2zM14 19h1v1h-1zM16 19h1v1h-1zM25 19h1v1h-1zM2 20h1v1h-1zM6 20h1v1h-1zM8 20h2v1h-2zM11 20h1v1h-1zM15 20h2v1h-2zM18 20h1v1h-1zM20 20h1v1h-1zM24 20h7v1h-7zM5 21h2v1h-2zM9 21h1v1h-1zM11 21h4v1h-4zM16 21h5v1h-5zM22 21h2v1h-2zM26 21h1v1h-1zM30 21h1v1h-1zM2 22h1v1h-1zM4 22h2v1h-2zM7 22h2v1h-2zM10 22h5v1h-5zM18 22h1v1h-1zM21 22h6v1h-6zM28 22h3v1h-3zM10 23h1v1h-1zM12 23h4v1h-4zM20 23h3v1h-3zM26 23h2v1h-2zM2 24h7v1h-7zM12 24h5v1h-5zM19 24h2v1h-2zM22 24h1v1h-1zM24 24h1v1h-1zM26 24h4v1h-4zM2 25h1v1h-1zM8 25h1v1h-1zM10 25h3v1h-3zM15 25h4v1h-4zM22 25h1v1h-1zM26 25h1v1h-1zM28 25h1v1h-1zM2 26h1v1h-1zM4 26h3v1h-3zM8 26h1v1h-1zM13 26h2v1h-2zM16 26h4v1h-4zM22 26h5v1h-5zM28 26h1v1h-1zM2 27h1v1h-1zM4 27h3v1h-3zM8 27h1v1h-1zM10 27h1v1h-1zM19 27h1v1h-1zM21 27h1v1h-1zM24 27h2v1h-2zM27 27h1v1h-1zM29 27h1v1h-1zM2 28h1v1h-1zM4 28h3v1h-3zM8 28h1v1h-1zM11 28h1v1h-1zM19 28h1v1h-1zM21 28h4v1h-4zM26 28h1v1h-1zM30 28h1v1h-1zM2 29h1v1h-1zM8 29h1v1h-1zM12 29h1v1h-1zM16 29h4v1h-4zM21 29h2v1h-2zM29 29h1v1h-1zM2 30h7v1h-7zM10 30h1v1h-1zM12 30h1v1h-1zM14 30h2v1h-2zM19 30h1v1h-1zM21 30h3v1h-3zM25 30h5v1h-5z"}},"g2":{"label_ru":"2 класс · МСО-1","label_az":"2-ci sinif · KSQ-1","title_ru":"Раздел 1. Сравнение чисел. Упорядочивание (до 100)","title_az":"Bölmə 1. Ədədlərin müqayisəsi. Sıralama (100-ə qədər)","source_ru":"Учебник «Математика. 2 класс» (2021, гриф 2021-022), ч. 1, с. 8–16 — повторение, темы 1 и 2, задачи и обобщающие задания раздела.","source_az":"«Riyaziyyat. 2-ci sinif» dərsliyi (2021, qrif 2021-022), 1-ci hissə, səh. 8–16.","note_ru":"МСО-1 в конце раздела: 20 тестовых заданий с ответами а, б, в — по 5 баллов, всего 100. Оценка: «5» — 81–100, «4» — 61–80, «3» — 31–60, «2» — 0–30. По каждому критерию программа покажет уровень I–IV — кому что повторить.","note_az":"Bölmənin sonunda KSQ-1: a, b, c cavablı 20 test tapşırığı — hər biri 5 bal, cəmi 100. Qiymət: «5» — 81–100, «4» — 61–80, «3» — 31–60, «2» — 0–30. Hər meyar üzrə I–IV səviyyə göstərilir — kimin nəyi təkrarlaması lazımdır.","kind":"marks","points_per_task":5,"criteria":[{"id":"K1","std":"2-1.1.1","ru":"Ведёт ритмический счёт вперёд и назад","tasks":[1,2,3,4]},{"id":"K2","std":"2-1.1.3","ru":"Раскладывает число на десятки и единицы","tasks":[5,6,7,8]},{"id":"K3","std":"2-1.1.2","ru":"Читает и записывает числа до 100","tasks":[9,10,11,12]},{"id":"K4","std":"2-1.1.4","ru":"Сравнивает числа, ставит знаки >, <, =","tasks":[13,14,15,16]},{"id":"K5","std":"2-1.1.4","ru":"Упорядочивает числа","tasks":[17,18,19,20]}],"marks":[{"min":81,"mark":5},{"min":61,"mark":4},{"min":31,"mark":3},{"min":0,"mark":2}],"marks_rule_ru":"«5» — 81–100 баллов, «4» — 61–80, «3» — 31–60, «2» — 0–30. 20 заданий по 5 баллов. Формат заданий (тест а/б/в, критерии, уровни I–IV) — по методичке «Математика 2» (2014); перевода баллов в оценку в ней нет, шкала взята из методички «Русский язык 2», с. 5.","marks_rule_az":"«5» — 81–100 bal, «4» — 61–80, «3» — 31–60, «2» — 0–30.","crit_levels_rule_ru":"Методичка «Математика 2», с. 11–13: балл по критерию от 1 до 4 (1 — очень малая часть, 2 — несколько, 3 — большинство, 4 — все); среднее 1–1,4 — I уровень, 1,5–2,4 — II, 2,5–3,4 — III, 3,5–4 — IV. При фото-проверке балл критерия = число верных из 4 (не меньше 1).","crit_levels_rule_az":"Hər meyar üzrə 1–4 bal; orta bal 1–1,4 — I səviyyə, 1,5–2,4 — II, 2,5–3,4 — III, 3,5–4 — IV.","tasks":[{"n":1,"q":"Считай десятками вперёд: 14, 24, 34, … Какое число следующее?","opts":["35","44","43"],"a":"б","v":"str(34 + 10)"},{"n":2,"q":"Считай пятёрками назад: 60, 55, 50, … Какое число следующее?","opts":["45","40","49"],"a":"а","v":"str(50 - 5)"},{"n":3,"q":"Считай двойками вперёд от 36. Какое число будет на 3-м шаге?","opts":["40","39","42"],"a":"в","v":"str(36 + 2 * 3)"},{"n":4,"q":"Какое число пропущено: 91, 81, ▢, 61?","opts":["71","70","72"],"a":"а","v":"str(only([x for x in range(101) if 81 - x == 10 and x - 61 == 10]))"},{"n":5,"q":"Сколько десятков в числе 58?","opts":["8","5","58"],"a":"б","v":"str(58 // 10)"},{"n":6,"q":"Какое число состоит из 7 десятков и 3 единиц?","opts":["37","70","73"],"a":"в","v":"str(7 * 10 + 3)"},{"n":7,"q":"Как разложить число 46 на десятки и единицы?","opts":["40 + 6","4 + 6","60 + 4"],"a":"а","v":"'%d + %d' % (46 // 10 * 10, 46 % 10)"},{"n":8,"q":"Какая цифра стоит в разряде единиц числа 90?","opts":["9","0","1"],"a":"б","v":"str(90 % 10)"},{"n":9,"q":"Как записать цифрами «шестьдесят два»?","opts":["26","602","62"],"a":"в","v":"str(from_words('шестьдесят два'))"},{"n":10,"q":"Как читается число 17?","opts":["семьдесят","семнадцать","семьдесят один"],"a":"б","v":"words(17)"},{"n":11,"q":"Какое число стоит на числовой оси сразу после 69?","opts":["70","60","68"],"a":"а","v":"str(69 + 1)"},{"n":12,"q":"Какое число стоит на числовой оси сразу перед 40?","opts":["39","41","30"],"a":"а","v":"str(40 - 1)"},{"n":13,"q":"Какой знак нужен: 47 ◯ 74?","opts":[">","<","="],"a":"б","v":"sign(47,74)"},{"n":14,"q":"Какой знак нужен: 85 ◯ 82?","opts":[">","<","="],"a":"а","v":"sign(85,82)"},{"n":15,"q":"Какая запись верная?","opts":["39 > 41","70 = 7","56 < 65"],"a":"в","v":"only_true(opts)"},{"n":16,"q":"У Нурай 38 марок, у Фарида 33. У кого больше марок?","opts":["у Нурай","у Фарида","поровну"],"a":"а","v":"'у Нурай' if 38 > 33 else 'у Фарида' if 33 > 38 else 'поровну'"},{"n":17,"q":"Расположи числа по возрастанию: 52, 25, 50.","opts":["25, 50, 52","52, 50, 25","25, 52, 50"],"a":"а","v":"fmt(sorted([52,25,50]))"},{"n":18,"q":"Расположи числа по убыванию: 68, 86, 66.","opts":["66, 68, 86","86, 68, 66","86, 66, 68"],"a":"б","v":"fmt(sorted([68,86,66], reverse=True))"},{"n":19,"q":"Какое число самое большое: 79, 97, 88?","opts":["79","88","97"],"a":"в","v":"str(max([79,97,88]))"},{"n":20,"q":"Какое число стоит между 58 и 60?","opts":["57","61","59"],"a":"в","v":"only([o for o in opts if 58 < int(o) < 60])"}],"review":{"K1":[{"q":"Продолжи счёт десятками: 23, 33, 43, …, …","a":"53, 63","v":"fmt([43 + 10, 43 + 20])"},{"q":"Считай пятёрками назад: 85, 80, …, …","a":"75, 70","v":"fmt([80 - 5, 80 - 10])"},{"q":"Считай двойками вперёд: 50, 52, 54, …, …","a":"56, 58","v":"fmt([54 + 2, 54 + 4])"},{"q":"Какое число пропущено: 17, 27, ▢, 47?","a":"37","v":"str(27 + 10)"}],"K2":[{"q":"Сколько в числе 64 десятков и сколько единиц?","a":"6 дес. 4 ед.","v":"'%d дес. %d ед.' % (64 // 10, 64 % 10)"},{"q":"Запиши число: 8 дес. 1 ед.","a":"81","v":"str(8 * 10 + 1)"},{"q":"Разложи на десятки и единицы: 39 = ▢ + ▢","a":"30 + 9","v":"'%d + %d' % (39 // 10 * 10, 39 % 10)"},{"q":"Какая цифра стоит в разряде единиц числа 50?","a":"0","v":"str(50 % 10)"}],"K3":[{"q":"Запиши цифрами: «сорок пять».","a":"45","v":"str(from_words('сорок пять'))"},{"q":"Запиши словами число 91.","a":"девяносто один","v":"words(91)"},{"q":"Какое число стоит на оси сразу после 79?","a":"80","v":"str(79 + 1)"},{"q":"Какое число стоит на оси сразу перед 60?","a":"59","v":"str(60 - 1)"}],"K4":[{"q":"63 ◯ 36","a":">","v":"sign(63,36)"},{"q":"29 ◯ 92","a":"<","v":"sign(29,92)"},{"q":"50 ◯ 50","a":"=","v":"sign(50,50)"},{"q":"У Ульви 45 открыток, у Гюнай 54. У кого больше?","a":"У Гюнай: 45 < 54","v":"('У Гюнай' if 54 > 45 else 'У Ульви') + ': ' + rel(45,54)"}],"K5":[{"q":"Расположи по возрастанию: 41, 14, 40.","a":"14, 40, 41","v":"fmt(sorted([41,14,40]))"},{"q":"Расположи по убыванию: 77, 70, 97.","a":"97, 77, 70","v":"fmt(sorted([77,70,97], reverse=True))"},{"q":"Какое число самое маленькое: 33, 30, 38?","a":"30","v":"str(min([33,30,38]))"},{"q":"Какое число стоит между 89 и 91?","a":"90","v":"str(only([x for x in range(101) if 89 < x < 91]))"}]},"qr":"UROKUM DEMO | RU-mat-2 | MSO-1 | blank","answers":["бавабвабвбаааваавбвв","ваввбввбвбаабавааббв","ааавваввбабававввбвб","бавабвабвбаабаваабав","бабабвабббаббвваабва","бавабвабвбаабаваабвв","бавабвабвбаабаваабвв","бавабвабвбаабавааввв","авваввавабвавбавввбв","бавабвабвбаааабаввбв","бавабвабвбааааввабвв","бавабвабвбааббввабвв","бввабвабвбааббваабвв","бввббвабабвааваааавв","бввабвабвбаабввввааа","ббвбавабабааваааабвв","бваааввбабабвабвввва","бавабвабвбаабаваабвв","бавабвабвбаабавааввв","бвваввабвбаббавааавв","бавабвабвбавбавабббв","бавабвабвбаабаваабвв","бааабвабвбаабаввааав","бавабвабвбаабаваабвв"],"qr_svg":{"size":33,"d":"M2 2h7v1h-7zM11 2h7v1h-7zM20 2h3v1h-3zM24 2h7v1h-7zM2 3h1v1h-1zM8 3h1v1h-1zM11 3h7v1h-7zM19 3h1v1h-1zM24 3h1v1h-1zM30 3h1v1h-1zM2 4h1v1h-1zM4 4h3v1h-3zM8 4h1v1h-1zM14 4h1v1h-1zM18 4h4v1h-4zM24 4h1v1h-1zM26 4h3v1h-3zM30 4h1v1h-1zM2 5h1v1h-1zM4 5h3v1h-3zM8 5h1v1h-1zM11 5h1v1h-1zM13 5h1v1h-1zM16 5h2v1h-2zM20 5h3v1h-3zM24 5h1v1h-1zM26 5h3v1h-3zM30 5h1v1h-1zM2 6h1v1h-1zM4 6h3v1h-3zM8 6h1v1h-1zM12 6h2v1h-2zM16 6h4v1h-4zM22 6h1v1h-1zM24 6h1v1h-1zM26 6h3v1h-3zM30 6h1v1h-1zM2 7h1v1h-1zM8 7h1v1h-1zM10 7h2v1h-2zM14 7h1v1h-1zM16 7h2v1h-2zM20 7h2v1h-2zM24 7h1v1h-1zM30 7h1v1h-1zM2 8h7v1h-7zM10 8h1v1h-1zM12 8h1v1h-1zM14 8h1v1h-1zM16 8h1v1h-1zM18 8h1v1h-1zM20 8h1v1h-1zM22 8h1v1h-1zM24 8h7v1h-7zM11 9h2v1h-2zM16 9h2v1h-2zM19 9h1v1h-1zM22 9h1v1h-1zM2 10h1v1h-1zM5 10h1v1h-1zM7 10h2v1h-2zM10 10h1v1h-1zM13 10h2v1h-2zM17 10h2v1h-2zM20 10h2v1h-2zM23 10h1v1h-1zM25 10h1v1h-1zM2 11h1v1h-1zM5 11h3v1h-3zM9 11h2v1h-2zM12 11h4v1h-4zM18 11h2v1h-2zM24 11h1v1h-1zM27 11h3v1h-3zM4 12h2v1h-2zM7 12h3v1h-3zM14 12h3v1h-3zM20 12h5v1h-5zM26 12h1v1h-1zM29 12h1v1h-1zM5 13h1v1h-1zM7 13h1v1h-1zM9 13h2v1h-2zM13 13h4v1h-4zM21 13h1v1h-1zM23 13h1v1h-1zM28 13h1v1h-1zM30 13h1v1h-1zM3 14h1v1h-1zM5 14h1v1h-1zM7 14h2v1h-2zM14 14h1v1h-1zM16 14h1v1h-1zM18 14h1v1h-1zM24 14h1v1h-1zM27 14h3v1h-3zM2 15h1v1h-1zM4 15h3v1h-3zM11 15h1v1h-1zM13 15h3v1h-3zM21 15h3v1h-3zM25 15h1v1h-1zM27 15h1v1h-1zM29 15h2v1h-2zM2 16h3v1h-3zM6 16h7v1h-7zM14 16h3v1h-3zM18 16h2v1h-2zM22 16h1v1h-1zM24 16h1v1h-1zM27 16h1v1h-1zM29 16h2v1h-2zM7 17h1v1h-1zM9 17h1v1h-1zM13 17h1v1h-1zM17 17h1v1h-1zM19 17h3v1h-3zM23 17h1v1h-1zM26 17h1v1h-1zM29 17h2v1h-2zM3 18h3v1h-3zM8 18h3v1h-3zM12 18h1v1h-1zM14 18h2v1h-2zM21 18h3v1h-3zM26 18h3v1h-3zM3 19h3v1h-3zM7 19h1v1h-1zM11 19h3v1h-3zM15 19h2v1h-2zM20 19h1v1h-1zM25 19h1v1h-1zM2 20h1v1h-1zM8 20h1v1h-1zM10 20h1v1h-1zM13 20h2v1h-2zM16 20h1v1h-1zM18 20h3v1h-3zM24 20h7v1h-7zM5 21h3v1h-3zM9 21h1v1h-1zM12 21h3v1h-3zM16 21h2v1h-2zM19 21h2v1h-2zM22 21h2v1h-2zM26 21h1v1h-1zM30 21h1v1h-1zM2 22h1v1h-1zM5 22h5v1h-5zM13 22h1v1h-1zM17 22h1v1h-1zM19 22h1v1h-1zM21 22h6v1h-6zM28 22h3v1h-3zM10 23h1v1h-1zM13 23h2v1h-2zM16 23h1v1h-1zM18 23h1v1h-1zM21 23h2v1h-2zM26 23h2v1h-2zM2 24h7v1h-7zM11 24h3v1h-3zM19 24h1v1h-1zM22 24h1v1h-1zM24 24h1v1h-1zM26 24h4v1h-4zM2 25h1v1h-1zM8 25h1v1h-1zM10 25h1v1h-1zM14 25h1v1h-1zM16 25h2v1h-2zM20 25h1v1h-1zM22 25h1v1h-1zM26 25h1v1h-1zM28 25h3v1h-3zM2 26h1v1h-1zM4 26h3v1h-3zM8 26h1v1h-1zM12 26h1v1h-1zM18 26h3v1h-3zM22 26h5v1h-5zM28 26h3v1h-3zM2 27h1v1h-1zM4 27h3v1h-3zM8 27h1v1h-1zM10 27h1v1h-1zM13 27h1v1h-1zM15 27h1v1h-1zM18 27h1v1h-1zM21 27h1v1h-1zM24 27h2v1h-2zM27 27h1v1h-1zM29 27h1v1h-1zM2 28h1v1h-1zM4 28h3v1h-3zM8 28h1v1h-1zM12 28h1v1h-1zM19 28h1v1h-1zM21 28h4v1h-4zM26 28h1v1h-1zM30 28h1v1h-1zM2 29h1v1h-1zM8 29h1v1h-1zM15 29h1v1h-1zM17 29h1v1h-1zM19 29h4v1h-4zM29 29h1v1h-1zM2 30h7v1h-7zM10 30h1v1h-1zM12 30h2v1h-2zM15 30h1v1h-1zM18 30h6v1h-6zM25 30h5v1h-5z"}}},"students":["Айсель М.","Мурад Г.","Лейла А.","Тимур Р.","Нигяр С.","Эмиль К.","Камила Б.","Рауф Д.","Зарина Х.","Орхан Т.","Алина Ш.","Фарид Н.","Нармин И.","Артур В.","Самира Ю.","Илкин О.","Аида Ф.","Ровшан Л.","Вероника П.","Тофиг Е.","Гюнай З.","Эльдар Ч.","Диана Ц.","Руслан Я."],"i18n":{"ru":{"app":"Урокум","demo":"Демо","back":"Назад","nav_today":"Сегодня","nav_toc":"Содержание","nav_pack":"Пакет","nav_check":"Проверка","skip":"Пропустить","next":"Далее","finish":"Готово","step_of":"Шаг {n} из 3","onb1_title":"В каком секторе вы преподаёте?","sector_ru":"Русский сектор","sector_ru_sub":"Уроки на русском языке","sector_az":"Азербайджанский сектор","sector_az_sub":"Уроки на азербайджанском языке","onb2_title":"В каком классе?","grade_1":"1 класс","grade_2":"2 класс","grade_3":"3 класс","grade_4":"4 класс","onb3_title":"Какие предметы ведёте?","onb3_sub":"Можно выбрать несколько","subj_math":"Математика","subj_rus":"Русский язык","subj_az":"Азербайджанский язык","subj_pm":"Познание мира","subj_inf":"Информатика","subj_tech":"Технология","demo_scope":"В демо наполнена математика 1 класса, русский сектор.","onb_hello":"Готовые материалы к каждому уроку по программе — план, слайды, листы, игра и проверка.","today_lesson":"Урок по учебнику","lessons_1":"1 урок","lessons_2":"2 урока","open_pack":"Открыть пакет урока","open_pack_n":"Пакет урока {n}","topic_done":"Тема пройдена","toast_done":"Отмечено. Следующая тема: {t}","undo":"Вернуть «Сравнение чисел»","tb_pages":"Учебник, ч. {part}, с. {pages}","wb_pages":"Рабочая тетрадь, с. {p}","standards":"Стандарты","section_n":"Раздел {n}","progress":"Пройдено тем: {d} из {n}","pack_stub":"Пакет этой темы в демо ещё не наполнен. Готов пакет урока 10 «Сравнение чисел».","open_l10":"Открыть «Сравнение чисел»","reset":"Начать демо заново","min":"{n} мин","total":"Итого","two_lessons_note":"2 урока подряд — 90 минут: «Сравнение чисел» и «Числовая ось».","toc_title":"Содержание учебника","part_n":"Часть {n}","done":"пройдено","today_mark":"сегодня","pack_title":"Пакет урока","tile_plan":"План урока ARTİ","tile_plan_sub":"45 минут, 7 этапов","tile_slides":"Слайды","tile_slides_sub":"8 слайдов с заметками","tile_ws":"Рабочие листы","tile_ws_sub":"Уровни A, B, C + ответы","tile_cards":"Карточки для групп","tile_cards_sub":"От 2 до 6 групп","tile_info":"Инфографика","tile_info_sub":"Алгоритм на одном экране","tile_game":"Игра для детей","tile_game_sub":"«Миллионер», 10 вопросов","tile_check":"Проверка по разделу","tile_check_sub":"Задания и бланк с QR","tile_scan":"Фото-проверка","tile_scan_sub":"Бланки → оценки","tile_gaps":"Пробелы по стандартам","tile_gaps_sub":"Кому нужен лист повторения","tile_dl":"Скачать","tile_dl_sub":"Word, PDF, PowerPoint","plan_title":"План урока ARTİ","plan_course":"Ход урока","plan_criteria":"Критерии оценивания (I–IV)","plan_sources":"Источники","f_topic":"Тема","f_standards":"Стандарты","f_goals":"Учебные цели","f_integration":"Интеграция","f_form":"Форма работы","f_methods":"Методы и приёмы","f_equipment":"Оборудование","st_1":"Мотивация","st_2":"Проведение исследования","st_3":"Обсуждение и организация информации","st_4":"Выводы","st_5":"Творческое применение","st_6":"Оценивание / рефлексия","st_7":"Домашнее задание","tap_stage":"Нажмите на этап, чтобы раскрыть","slides_title":"Слайды","slide_n":"Слайд {i} из {n}","notes":"Заметки учителя","swipe":"Листайте пальцем или стрелками","ws_title":"Рабочие листы","level_A":"A · базовый","level_B":"B · средний","level_C":"C · высокий","show_answers":"Показать ответы","hide_answers":"Скрыть ответы","name_line":"Имя: ____________","cards_title":"Карточки для групп","groups_q":"Сколько групп в классе?","group_n":"Группа {n}","key":"Ответ","info_title":"Инфографика","signs":"Знаки","how_read":"Как читаем","game_title":"Игра «Миллионер»","game_intro":"10 вопросов, 4 ответа. Подсказки «50 на 50» и «Подсказка» — по одному разу.","game_start":"Начать игру","q_of":"Вопрос {i} из {n}","fifty":"50 на 50","hint":"Подсказка","next_q":"Следующий вопрос","to_result":"Узнать результат","result":"Результат","play_again":"Играть ещё раз","points":"баллов","correct_of":"Верно {c} из {n}","right":"Верно!","wrong":"Неверно. Правильный ответ: {a}","game_great":"Отлично! Ты умеешь сравнивать числа.","game_good":"Хорошо! Ещё немного практики.","game_try":"Попробуй ещё раз — у тебя получится!","check_title":"Проверка","c_tasks":"Задания","c_key":"Ключ ответов","c_sheet":"Бланк с QR","c_scan":"Фото-проверка","c_gaps":"Пробелы по стандартам","c_tasks_sub":"Вопросы с ответами а, б, в","c_key_sub":"Ответы и критерии","c_sheet_sub":"Распечатать для каждого","c_scan_sub":"24 бланка за минуту","c_gaps_sub":"Лист повторения","crit":"Критерий","tasks_n":"Задания {t}","sheet_title":"Бланк ответов","sheet_name":"Ученик","sheet_class":"Класс","sheet_hint":"Закрасьте кружок с верным ответом. QR не закрывать.","scan_btn":"Сфотографировать бланки","scan_intro":"Положите бланки на стол и сфотографируйте пачкой — по одному кадру на бланк. QR подскажет, чей бланк.","scanning":"Проверяю бланки…","checked":"Проверено {i} из {n}","results":"Результаты","student":"Ученик","right_n":"Верно","students_n":"Учеников","level":"Уровень","points100":"Баллы","mark":"Оценка","class_total":"Итог по классу","avg_correct":"Средний результат","avg_points":"Средний балл","quality":"Качество знаний","success":"Успеваемость","rescan":"Проверить заново","tap_row":"Нажмите на ученика — покажу ответы","by_crit":"По критериям","crit_levels":"Уровни по критериям","avg":"среднее","gaps_title":"Пробелы по стандартам","gaps_intro":"Сколько учеников ошиблись хотя бы в одном задании по стандарту.","gaps_wrong":"ошиблись {n} из {m}","review_btn":"Лист повторения","review_title":"Лист повторения","review_for":"Для учеников ({n})","review_print":"Распечатать","class_level":"Уровень класса","dl_title":"Скачать","dl_toast":"В рабочей версии файл скачается.","dl_link":"Ссылка","dl_link_toast":"В рабочей версии ссылка на игру скопируется — дети откроют её на телефоне или на доске.","ok":"Понятно","answer_word":"Ответ","of":"из","az_note":""},"az":{"app":"Urokum","demo":"Demo","back":"Geri","nav_today":"Bu gün","nav_toc":"Mündəricat","nav_pack":"Paket","nav_check":"Yoxlama","skip":"Keç","next":"İrəli","finish":"Hazırdır","step_of":"Addım {n} / 3","onb1_title":"Hansı bölmədə dərs deyirsiniz?","sector_ru":"Rus bölməsi","sector_ru_sub":"Dərslər rus dilində","sector_az":"Azərbaycan bölməsi","sector_az_sub":"Dərslər Azərbaycan dilində","onb2_title":"Hansı sinif?","grade_1":"1-ci sinif","grade_2":"2-ci sinif","grade_3":"3-cü sinif","grade_4":"4-cü sinif","onb3_title":"Hansı fənləri tədris edirsiniz?","onb3_sub":"Bir neçəsini seçmək olar","subj_math":"Riyaziyyat","subj_rus":"Rus dili","subj_az":"Azərbaycan dili","subj_pm":"Həyat bilgisi","subj_inf":"İnformatika","subj_tech":"Texnologiya","demo_scope":"Demoda rus bölməsinin 1-ci sinif riyaziyyatı doldurulub.","onb_hello":"Proqrama uyğun hər dərs üçün hazır materiallar — plan, slaydlar, vərəqlər, oyun və yoxlama.","today_lesson":"Dərsliyə görə dərs","lessons_1":"1 dərs","lessons_2":"2 dərs","open_pack":"Dərs paketini aç","open_pack_n":"{n} saylı dərsin paketi","topic_done":"Mövzu keçildi","toast_done":"Qeyd edildi. Növbəti mövzu: {t}","undo":"«Ədədlərin müqayisəsi» mövzusunu qaytar","tb_pages":"Dərslik, {part}-ci hissə, səh. {pages}","wb_pages":"İş dəftəri, səh. {p}","standards":"Standartlar","section_n":"Bölmə {n}","progress":"Keçilən mövzular: {d} / {n}","pack_stub":"Bu mövzunun paketi demoda hələ doldurulmayıb. 10 saylı «Ədədlərin müqayisəsi» dərsinin paketi hazırdır.","open_l10":"«Ədədlərin müqayisəsi»ni aç","reset":"Demonu yenidən başla","min":"{n} dəq","total":"Cəmi","two_lessons_note":"Ardıcıl 2 dərs — 90 dəqiqə: «Ədədlərin müqayisəsi» və «Ədəd oxu».","toc_title":"Dərsliyin mündəricatı","part_n":"{n}-ci hissə","done":"keçilib","today_mark":"bu gün","pack_title":"Dərs paketi","tile_plan":"ARTİ dərs planı","tile_plan_sub":"45 dəqiqə, 7 mərhələ","tile_slides":"Slaydlar","tile_slides_sub":"Qeydlərlə 8 slayd","tile_ws":"İş vərəqləri","tile_ws_sub":"A, B, C səviyyələri + cavablar","tile_cards":"Qrup kartları","tile_cards_sub":"2-dən 6-ya qədər qrup","tile_info":"İnfoqrafika","tile_info_sub":"Alqoritm bir ekranda","tile_game":"Uşaqlar üçün oyun","tile_game_sub":"«Milyonçu», 10 sual","tile_check":"Bölmə üzrə yoxlama","tile_check_sub":"Tapşırıqlar və QR blank","tile_scan":"Foto-yoxlama","tile_scan_sub":"Blanklar → nəticələr","tile_gaps":"Standartlar üzrə boşluqlar","tile_gaps_sub":"Kimə təkrar vərəqi lazımdır","tile_dl":"Yüklə","tile_dl_sub":"Word, PDF, PowerPoint","plan_title":"ARTİ dərs planı","plan_course":"Dərsin gedişi","plan_criteria":"Qiymətləndirmə meyarları (I–IV)","plan_sources":"Mənbələr","f_topic":"Mövzu","f_standards":"Standartlar","f_goals":"Təlim məqsədləri","f_integration":"İnteqrasiya","f_form":"Təlim forması","f_methods":"Təlim üsulları","f_equipment":"Resurslar","st_1":"Motivasiya","st_2":"Tədqiqatın aparılması","st_3":"Məlumatın müzakirəsi və təşkili","st_4":"Nəticə, ümumiləşdirmə","st_5":"Yaradıcı tətbiqetmə","st_6":"Qiymətləndirmə / refleksiya","st_7":"Ev tapşırığı","tap_stage":"Açmaq üçün mərhələyə toxunun","slides_title":"Slaydlar","slide_n":"Slayd {i} / {n}","notes":"Müəllim üçün qeydlər","swipe":"Barmaqla və ya oxlarla vərəqləyin","ws_title":"İş vərəqləri","level_A":"A · əsas","level_B":"B · orta","level_C":"C · yüksək","show_answers":"Cavabları göstər","hide_answers":"Cavabları gizlət","name_line":"Ad: ____________","cards_title":"Qrup kartları","groups_q":"Sinifdə neçə qrup var?","group_n":"Qrup {n}","key":"Cavab","info_title":"İnfoqrafika","signs":"İşarələr","how_read":"Necə oxuyuruq","game_title":"«Milyonçu» oyunu","game_intro":"10 sual, 4 cavab. «50:50» və «İpucu» — bir dəfə.","game_start":"Oyuna başla","q_of":"Sual {i} / {n}","fifty":"50:50","hint":"İpucu","next_q":"Növbəti sual","to_result":"Nəticəni gör","result":"Nəticə","play_again":"Yenidən oyna","points":"xal","correct_of":"Düzgün: {c} / {n}","right":"Düzdür!","wrong":"Səhvdir. Düzgün cavab: {a}","game_great":"Əla! Ədədləri müqayisə etməyi bacarırsan.","game_good":"Yaxşı! Bir az da məşq et.","game_try":"Yenidən cəhd et — alınacaq!","check_title":"Yoxlama","c_tasks":"Tapşırıqlar","c_key":"Cavab açarı","c_sheet":"QR-kodlu blank","c_scan":"Foto-yoxlama","c_gaps":"Standartlar üzrə boşluqlar","c_tasks_sub":"a, b, c cavablı suallar","c_key_sub":"Cavablar və meyarlar","c_sheet_sub":"Hər şagird üçün çap edin","c_scan_sub":"24 blank bir dəqiqəyə","c_gaps_sub":"Təkrar vərəqi","crit":"Meyar","tasks_n":"Tapşırıqlar {t}","sheet_title":"Cavab blankı","sheet_name":"Şagird","sheet_class":"Sinif","sheet_hint":"Düzgün cavabın dairəsini rəngləyin. QR-kodu örtməyin.","scan_btn":"Blankların şəklini çək","scan_intro":"Blankları stolun üstünə qoyun və bir-bir şəklini çəkin. QR-kod blankın kimə aid olduğunu göstərir.","scanning":"Blanklar yoxlanılır…","checked":"Yoxlanıldı: {i} / {n}","results":"Nəticələr","student":"Şagird","right_n":"Düzgün","students_n":"Şagird sayı","level":"Səviyyə","points100":"Bal","mark":"Qiymət","class_total":"Sinif üzrə yekun","avg_correct":"Orta nəticə","avg_points":"Orta bal","quality":"Bilik keyfiyyəti","success":"Müvəffəqiyyət","rescan":"Yenidən yoxla","tap_row":"Cavabları görmək üçün şagirdə toxunun","by_crit":"Meyarlar üzrə","crit_levels":"Meyarlar üzrə səviyyələr","avg":"orta","gaps_title":"Standartlar üzrə boşluqlar","gaps_intro":"Standart üzrə ən azı bir tapşırıqda səhv edən şagirdlərin sayı.","gaps_wrong":"səhv edən: {n} / {m}","review_btn":"Təkrar vərəqi","review_title":"Təkrar vərəqi","review_for":"Şagirdlər üçün ({n})","review_print":"Çap et","class_level":"Sinfin səviyyəsi","dl_title":"Yüklə","dl_toast":"İşçi versiyada fayl yüklənəcək.","dl_link":"Link","dl_link_toast":"İşçi versiyada oyunun linki kopyalanacaq — uşaqlar onu telefonda və ya lövhədə açacaq.","ok":"Aydındır","answer_word":"Cavab","of":"/","az_note":"Demo: paketin məzmunu rus bölməsi üçündür."}},"standards":{"1-1.1.3":{"ru":"Определяет место числа на числовом луче.","az":"Ədəd oxunda ədədin yerini müəyyən edir."},"1-1.1.5":{"ru":"Сравнивает и упорядочивает числа в пределах 20.","az":"20 dairəsində ədədləri müqayisə edir və sıralayır."},"1-2.1.2":{"ru":"Рассуждает о простых числовых неравенствах.","az":"Sadə ədədi bərabərsizliklərlə bağlı mühakimələr yürüdür."},"2-1.1.1":{"ru":"Ведёт ритмический счёт вперёд и назад в пределах 1 000, начиная с любого числа.","az":"1 000 dairəsində hər hansı ədəddən başlayaraq irəli və geri ritmik sayır."},"2-1.1.2":{"ru":"Узнаёт, читает и записывает числа в пределах 1 000.","az":"1 000 dairəsində ədədləri tanıyır, oxuyur və yazır."},"2-1.1.3":{"ru":"Понимает понятие разряда и представляет числа в пределах 1 000 в виде суммы разрядных слагаемых (в развёрнутом виде).","az":"Mərtəbə anlayışını başa düşür və 1 000 dairəsində ədədləri mərtəbə toplananlarının cəmi şəklində (açıq şəkildə) ifadə edir."},"2-1.1.4":{"ru":"Сравнивает и упорядочивает числа в пределах 100.","az":"100 dairəsində ədədləri müqayisə edir və sıralayır."}}}</script>
+<script>
+'use strict';
+const C = JSON.parse(document.getElementById('content').textContent);
+const ITEMS = C.toc.flatMap(s => s.items);
+const L10 = ITEMS.find(i => i.full);
+const L10_IDX = ITEMS.indexOf(L10);
+const LS_KEY = 'urokum-demo-v1';
+const DEF = {onb: false, sector: 'ru', grade: 1, subjects: ['math'], lang: 'ru', done: null, lessons: 1,
+  scanned: {g1: false, g2: false}, checkGrade: 'g1'};
+const S = Object.assign({}, DEF, loadState());
+if (!Array.isArray(S.done)) S.done = ITEMS.slice(0, L10_IDX).map(i => i.id);
+if (!S.scanned) S.scanned = {g1: false, g2: false};
+
+function loadState() { try { return JSON.parse(localStorage.getItem(LS_KEY)) || {}; } catch (e) { return {}; } }
+function save() { try { localStorage.setItem(LS_KEY, JSON.stringify(S)); } catch (e) {} }
+
+/* ---------- утилиты ---------- */
+function t(k, vars) {
+  let s = (C.i18n[S.lang] || {})[k];
+  if (s == null || s === '') s = C.i18n.ru[k];
+  if (s == null) s = k;
+  if (vars) s = s.replace(/\{(\w+)\}/g, (m, n) => vars[n] != null ? vars[n] : m);
+  return s;
+}
+function esc(s) { return String(s).replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c])); }
+function L(o, base) { return (S.lang === 'az' && o[base + '_az']) ? o[base + '_az'] : o[base + '_ru']; }
+function topicName(it) { return (S.lang === 'az' && it.az) ? it.az : it.ru; }
+function topicLabel(it) { return (it.no ? it.no + '. ' : '') + topicName(it); }
+function stdText(code) { const s = C.standards[code]; return s ? s[S.lang] || s.ru : ''; }
+function dec(n) { return (Math.round(n * 10) / 10).toFixed(1).replace('.', ','); }
+function pct(n) { return Math.round(n * 100) + ' %'; }
+function num(n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ' '); }
+const COL = {red: '#e5484d', blue: '#3b82f6', green: '#22a06b', orange: '#f08c2e', purple: '#8e5cd9', teal: '#0f9b9b', yellow: '#f2b705'};
+const STAGE_COL = ['#3b82f6', '#8e5cd9', '#0f9b9b', '#22a06b', '#f08c2e', '#e5484d', '#64748b'];
+const LETTERS_RU = ['а', 'б', 'в'];
+const LETTERS_AZ = ['a', 'b', 'c'];
+function letter(i) { return (S.lang === 'az' ? LETTERS_AZ : LETTERS_RU)[i]; }
+const GAME_LT = {ru: ['А', 'Б', 'В', 'Г'], az: ['A', 'B', 'C', 'D']};
+
+function stdBlock(codes) {
+  return '<div>' + codes.map(c => `<div class="std"><span class="code">${esc(c)}</span><span class="txt">${esc(stdText(c))}</span></div>`).join('') + '</div>';
+}
+function todayStr() {
+  const d = new Date();
+  const ru = {wd: ['воскресенье', 'понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота'],
+    mo: ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря']};
+  const az = {wd: ['bazar', 'bazar ertəsi', 'çərşənbə axşamı', 'çərşənbə', 'cümə axşamı', 'cümə', 'şənbə'],
+    mo: ['yanvar', 'fevral', 'mart', 'aprel', 'may', 'iyun', 'iyul', 'avqust', 'sentyabr', 'oktyabr', 'noyabr', 'dekabr']};
+  if (S.lang === 'az') return `${d.getDate()} ${az.mo[d.getMonth()]}, ${az.wd[d.getDay()]}`;
+  const w = ru.wd[d.getDay()];
+  return w.charAt(0).toUpperCase() + w.slice(1) + `, ${d.getDate()} ${ru.mo[d.getMonth()]}`;
+}
+
+/* ---------- иконки ---------- */
+const I = {
+  chev: '<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>',
+  check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
+  prev: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>',
+  next: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>',
+  plan: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg>',
+  slides: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M12 16v4M8 20h8"/></svg>',
+  ws: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4M9 12h7M9 16h5"/></svg>',
+  cards: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="6" width="12" height="15" rx="2"/><path d="M8 3h11a2 2 0 0 1 2 2v13"/></svg>',
+  info: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="12" r="3"/><circle cx="6" cy="18" r="3"/><path d="M9 6h3l3 5M9 18h3l3-5"/></svg>',
+  game: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.6 6.6 19.5l1.2-6L3.3 9.3l6.1-.7z"/></svg>',
+  mso: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 3v2h6V3M8.5 12.5l2.2 2.2 4.8-4.8"/></svg>',
+  scan: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8V6a2 2 0 0 1 2-2h2M16 4h2a2 2 0 0 1 2 2v2M20 16v2a2 2 0 0 1-2 2h-2M8 20H6a2 2 0 0 1-2-2v-2"/><circle cx="12" cy="12" r="3.5"/></svg>',
+  gaps: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 6h16M4 12h10M4 18h6"/></svg>',
+  dl: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>',
+  key: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M17 6l3 3"/></svg>',
+  qr: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h3v3h-3zM18 18h3v3h-3z"/></svg>',
+  print: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M7 9V3h10v6"/><rect x="3" y="9" width="18" height="8" rx="2"/><path d="M7 14h10v7H7z"/></svg>'
+};
+
+/* ---------- рисунки (SVG) ---------- */
+function dotsSvg(n, color) {
+  const per = 5, r = 9, g = 22;
+  const cols = Math.min(n, per) || 1, rows = Math.max(1, Math.ceil(n / per));
+  const w = cols * g + 4, h = rows * g + 4;
+  let s = `<svg viewBox="0 0 ${w} ${h}" width="${w}" height="${h}" aria-hidden="true">`;
+  for (let i = 0; i < n; i++) {
+    const x = 2 + (i % per) * g + g / 2, y = 2 + Math.floor(i / per) * g + g / 2;
+    s += `<circle cx="${x}" cy="${y}" r="${r}" fill="${color || '#2f6fed'}"/>`;
+  }
+  return s + '</svg>';
+}
+function rowsSvg(a, ca, b, cb, pairs) {
+  const g = 30, r = 11, n = Math.max(a, b), w = n * g + 16, h = 86;
+  let s = `<svg viewBox="0 0 ${w} ${h}" width="${w}" height="${h}" aria-hidden="true">`;
+  if (pairs) for (let i = 0; i < Math.min(a, b); i++) {
+    const x = 8 + i * g + g / 2;
+    s += `<line x1="${x}" y1="31" x2="${x}" y2="55" stroke="#5a6476" stroke-width="2.5" stroke-dasharray="4 3"/>`;
+  }
+  for (let i = 0; i < a; i++) {
+    const x = 8 + i * g + g / 2;
+    s += `<circle cx="${x}" cy="20" r="${r}" fill="${COL[ca] || ca}"/>`;
+    if (pairs && i >= b) s += `<circle cx="${x}" cy="20" r="${r + 4}" fill="none" stroke="#f2b705" stroke-width="3"/>`;
+  }
+  for (let i = 0; i < b; i++) {
+    const x = 8 + i * g + g / 2;
+    s += `<circle cx="${x}" cy="66" r="${r}" fill="${COL[cb] || cb}"/>`;
+    if (pairs && i >= a) s += `<circle cx="${x}" cy="66" r="${r + 4}" fill="none" stroke="#f2b705" stroke-width="3"/>`;
+  }
+  return s + '</svg>';
+}
+function trianglesSvg(n) {
+  const g = 30, w = n * g + 8;
+  let s = `<svg viewBox="0 0 ${w} 32" width="${w}" height="32" aria-hidden="true">`;
+  for (let i = 0; i < n; i++) { const x = 4 + i * g; s += `<path d="M${x + 3} 28 L${x + 14} 6 L${x + 25} 28 Z" fill="#f08c2e"/>`; }
+  return s + '</svg>';
+}
+/* Крокодил: dir 'gt' — пасть открыта влево (знак >), 'lt' — вправо (знак <), 'eq' — пасть закрыта (=). */
+function crocG(dir) {
+  const green = '#2fa35a', dark = '#1f7a41';
+  let g = '';
+  if (dir === 'eq') {
+    g += `<rect x="6" y="24" width="82" height="9" rx="4.5" fill="${green}"/><rect x="6" y="38" width="82" height="9" rx="4.5" fill="${green}"/>`;
+  } else {
+    g += `<path d="M84 35 L10 9 L10 61 Z" fill="#f6a5ad"/>`;
+    for (let i = 0; i < 5; i++) {
+      const tx = 18 + i * 13, ty1 = 9 + (tx - 10) * (26 / 74), ty2 = 61 - (tx - 10) * (26 / 74);
+      g += `<path d="M${tx} ${ty1 + 3} l5 1.8 l-2.8 6 Z" fill="#fff"/><path d="M${tx} ${ty2 - 3} l5 -1.8 l-2.8 -6 Z" fill="#fff"/>`;
+    }
+    g += `<line x1="86" y1="31" x2="8" y2="5" stroke="${green}" stroke-width="10" stroke-linecap="round"/>`;
+    g += `<line x1="86" y1="39" x2="8" y2="65" stroke="${green}" stroke-width="10" stroke-linecap="round"/>`;
+    g += `<circle cx="11" cy="4" r="1.6" fill="${dark}"/>`;
+  }
+  g += `<circle cx="88" cy="35" r="15" fill="${green}"/><circle cx="90" cy="20" r="8" fill="${green}"/>`;
+  g += `<circle cx="90" cy="19" r="5.5" fill="#fff"/><circle cx="88.3" cy="19" r="2.8" fill="#1b2333"/>`;
+  g += `<circle cx="94" cy="40" r="1.5" fill="${dark}"/><circle cx="84" cy="44" r="1.5" fill="${dark}"/>`;
+  if (dir === 'lt') return `<g transform="translate(106 0) scale(-1 1)">${g}</g>`;
+  return g;
+}
+function crocSvg(dir, w) { return `<svg viewBox="-2 -6 110 80" width="${w || 110}" height="${Math.round((w || 110) * 80 / 110)}" aria-hidden="true">${crocG(dir)}</svg>`; }
+function signOf(a, b) { return a > b ? '>' : a < b ? '<' : '='; }
+function dirOf(a, b) { return a > b ? 'gt' : a < b ? 'lt' : 'eq'; }
+function crocPairSvg(a, b) {
+  return `<svg viewBox="0 0 260 90" width="260" height="90" aria-hidden="true">
+    <text x="40" y="62" font-size="46" font-weight="800" text-anchor="middle" fill="#1b2333">${a}</text>
+    <g transform="translate(76 8)">${crocG(dirOf(a, b))}</g>
+    <text x="222" y="62" font-size="46" font-weight="800" text-anchor="middle" fill="#1b2333">${b}</text></svg>`;
+}
+function axisG(marks, x0, y, step, n) {
+  let s = `<line x1="${x0 - 8}" y1="${y}" x2="${x0 + step * n + 14}" y2="${y}" stroke="#1b2333" stroke-width="2.2"/>`;
+  s += `<path d="M${x0 + step * n + 16} ${y} l-8 -5 v10 z" fill="#1b2333"/>`;
+  for (let i = 0; i <= n; i++) {
+    const x = x0 + i * step, on = marks.includes(i);
+    s += `<line x1="${x}" y1="${y - 6}" x2="${x}" y2="${y + 6}" stroke="#1b2333" stroke-width="2"/>`;
+    s += `<text x="${x}" y="${y + 24}" font-size="${on ? 17 : 14}" font-weight="${on ? 800 : 500}" text-anchor="middle" fill="${on ? '#2f6fed' : '#5a6476'}">${i}</text>`;
+    if (on) s += `<circle cx="${x}" cy="${y}" r="8" fill="#2f6fed"/>`;
+  }
+  return s;
+}
+function axisSvg(marks) { return `<svg viewBox="0 0 330 64" width="330" height="64" aria-hidden="true">${axisG(marks, 16, 22, 28, 10)}</svg>`; }
+function pairsPic(a, b) { return rowsSvg(a, 'red', b, 'blue', true); }
+function picHtml(p) {
+  if (!p) return '';
+  if (p.t === 'rows') return `<span class="pic">${rowsSvg(p.a, p.ca, p.b, p.cb, false)}</span>`;
+  if (p.t === 'pairs') return `<span class="pic">${pairsPic(p.a, p.b)}</span>`;
+  if (p.t === 'tri') return `<span class="pic">${trianglesSvg(p.n)}</span>`;
+  if (p.t === 'croc') return `<span class="pic">${crocPairSvg(p.a, p.b)}</span>`;
+  if (p.t === 'axis') return `<span class="pic">${axisSvg(p.marks)}</span>`;
+  if (p.t === 'dots2') return `<span class="pic">${dotsSvg(p.a, '#e5484d')}</span>&nbsp;&nbsp;<span class="pic">${dotsSvg(p.b, '#3b82f6')}</span>`;
+  return '';
+}
+
+/* ---------- слайды ---------- */
+function svgText(x, y, s, size, opts) {
+  opts = opts || {};
+  return `<text x="${x}" y="${y}" font-size="${size}" font-weight="${opts.w || 700}" text-anchor="${opts.a || 'start'}" fill="${opts.c || '#1b2333'}">${esc(s)}</text>`;
+}
+function slideSvg(sl, i) {
+  let b = `<rect width="320" height="180" fill="#fff"/><rect width="320" height="6" fill="#2f6fed"/>`;
+  b += svgText(306, 172, `${i + 1}`, 10, {a: 'end', c: '#9aa4b8', w: 600});
+  const title = (y) => svgText(16, y || 32, sl.title, 19, {w: 800});
+  if (sl.t === 'title') {
+    b += `<rect x="0" y="6" width="320" height="174" fill="#f2f6ff"/>`;
+    b += svgText(160, 62, sl.title, 30, {a: 'middle', w: 900});
+    b += svgText(160, 86, sl.sub, 12, {a: 'middle', c: '#5a6476', w: 600});
+    b += `<g transform="translate(78 98) scale(0.72)">${crocG('gt')}</g>`;
+    b += svgText(196, 138, '8 > 5', 26, {w: 900, c: '#2f6fed'});
+  } else if (sl.t === 'rows' || sl.t === 'pairs') {
+    b += title();
+    const w = Math.max(sl.a, sl.b) * 30 + 16;
+    b += `<g transform="translate(${(320 - w) / 2} 44)">${rowsSvg(sl.a, sl.ca, sl.b, sl.cb, sl.t === 'pairs').replace(/^<svg[^>]*>|<\/svg>$/g, '')}</g>`;
+    b += svgText(160, 158, sl.text, 12.5, {a: 'middle', w: 700});
+  } else if (sl.t === 'signs') {
+    b += title();
+    sl.rows.forEach((r, k) => {
+      const y = 72 + k * 40;
+      b += `<rect x="14" y="${y - 26}" width="292" height="34" rx="9" fill="${['#e9f0ff', '#fff4dc', '#e2f6ea'][k]}"/>`;
+      b += svgText(28, y, r[0], 24, {w: 900});
+      b += svgText(118, y - 2, r[1], 14, {w: 600, c: '#3b4456'});
+    });
+  } else if (sl.t === 'croc') {
+    b += title();
+    b += `<g transform="translate(30 42)">${crocPairSvg(sl.a, sl.b).replace(/^<svg[^>]*>|<\/svg>$/g, '')}</g>`;
+    b += svgText(160, 158, sl.text, 13, {a: 'middle'});
+  } else if (sl.t === 'axis') {
+    b += title();
+    b += `<g transform="translate(-4 66)">${axisG(sl.marks, 22, 22, 28, 10)}</g>`;
+    b += svgText(160, 150, sl.text, 14, {a: 'middle'});
+  } else if (sl.t === 'try') {
+    b += title();
+    sl.items.forEach((p, k) => {
+      const y = 70 + k * 36;
+      b += svgText(110, y + 9, String(p[0]), 26, {a: 'end', w: 900});
+      b += `<g class="try-g" data-act="reveal"><rect x="40" y="${y - 18}" width="200" height="36" fill="transparent"/><circle cx="140" cy="${y}" r="15" fill="#fff" stroke="#2f6fed" stroke-width="2.5" stroke-dasharray="4 3"/>`;
+      b += `<text class="q" x="140" y="${y + 5}" font-size="13" text-anchor="middle" fill="#9aa4b8" font-weight="700">?</text>`;
+      b += `<text class="s" x="140" y="${y + 9}" font-size="24" text-anchor="middle" fill="#1f9d55" font-weight="900">${esc(signOf(p[0], p[1]))}</text></g>`;
+      b += svgText(170, y + 9, String(p[1]), 26, {w: 900});
+    });
+  } else if (sl.t === 'reflect') {
+    b += title();
+    b += `<rect x="24" y="44" width="52" height="128" rx="14" fill="#1b2333"/>`;
+    sl.items.forEach((it, k) => {
+      const y = 66 + k * 40, c = {green: '#22c55e', yellow: '#f2b705', red: '#ef4444'}[it[0]];
+      b += `<circle cx="50" cy="${y}" r="15" fill="${c}"/>`;
+      b += svgText(92, y + 5, it[1], 14, {w: 700});
+    });
+  }
+  return `<svg viewBox="0 0 320 180" role="img" aria-label="${esc(sl.title)}">${b}</svg>`;
+}
+
+/* ---------- проверка: расчёты ---------- */
+function results(g) {
+  const ch = C.checks[g];
+  return C.students.map((name, i) => {
+    const ans = ch.answers[i];
+    const per = ch.tasks.map((tk, j) => ans[j] === tk.a);
+    const correct = per.filter(Boolean).length;
+    const crit = ch.criteria.map(c => ({id: c.id, ok: c.tasks.filter(n => per[n - 1]).length, of: c.tasks.length}));
+    const r = {i, name, ans, per, correct, crit};
+    if (ch.kind === 'levels') {
+      r.level = ch.levels.find(l => correct >= l.min);
+    } else {
+      r.points = correct * ch.points_per_task;
+      r.mark = ch.marks.find(m => r.points >= m.min).mark;
+      r.critPts = crit.map(c => Math.max(1, c.ok));
+      r.critAvg = r.critPts.reduce((a, b) => a + b, 0) / r.critPts.length;
+      r.critLevel = roman(r.critAvg);
+    }
+    return r;
+  });
+}
+function roman(avg) { return avg >= 3.5 ? 'IV' : avg >= 2.5 ? 'III' : avg >= 1.5 ? 'II' : 'I'; }
+function gaps(g) {
+  const ch = C.checks[g], rs = results(g);
+  return ch.criteria.map(c => {
+    const who = rs.filter(r => c.tasks.some(n => !r.per[n - 1]));
+    const pts = rs.map(r => Math.max(1, c.tasks.filter(n => r.per[n - 1]).length));
+    const avg = pts.reduce((a, b) => a + b, 0) / pts.length;
+    return {c, who, wrong: who.length, avg, lvl: roman(avg)};
+  });
+}
+function critLabel(c) { return `${c.id} · ${c.std}`; }
+
+/* ---------- экраны ---------- */
+function vOnb(n) {
+  n = +n;
+  const dots = `<div class="steps">${[1, 2, 3].map(k => `<i class="${k <= n ? 'on' : ''}"></i>`).join('')}</div>`;
+  let body = '';
+  if (n === 1) {
+    body = `<div class="logo"><div class="mark">У</div><div><div class="h1">${esc(t('app'))}</div><div class="muted small">${esc(t('demo'))}</div></div></div>
+      <p class="small" style="margin:12px 0 18px">${esc(t('onb_hello'))}</p>
+      <div class="h2" style="margin-bottom:12px">${esc(t('onb1_title'))}</div>
+      <div class="stack">
+        ${['ru', 'az'].map(s => `<button class="opt ${S.sector === s ? 'on' : ''}" data-act="sector" data-v="${s}">
+          <span class="big">${s.toUpperCase()}</span><span><b>${esc(t('sector_' + s))}</b><span class="muted small">${esc(t('sector_' + s + '_sub'))}</span></span></button>`).join('')}
+      </div>`;
+  } else if (n === 2) {
+    body = `<div class="h2" style="margin-bottom:12px">${esc(t('onb2_title'))}</div>
+      <div class="grades">${[1, 2, 3, 4].map(g => `<button class="opt ${S.grade === g ? 'on' : ''}" data-act="grade" data-v="${g}">
+        <span class="big">${g}</span><b>${esc(t('grade_' + g))}</b></button>`).join('')}</div>`;
+  } else {
+    const subs = ['math', 'rus', 'az', 'pm', 'inf', 'tech'];
+    body = `<div class="h2">${esc(t('onb3_title'))}</div><p class="muted small" style="margin:4px 0 12px">${esc(t('onb3_sub'))}</p>
+      <div class="subjects">${subs.map(s => `<button class="${S.subjects.includes(s) ? 'on' : ''}" data-act="subj" data-v="${s}">${esc(t('subj_' + s))}</button>`).join('')}</div>
+      <div class="note blue" style="margin-top:16px">${esc(t('demo_scope'))}</div>`;
+  }
+  const nextBtn = n < 3
+    ? `<button class="btn pri" data-go="/onb/${n + 1}">${esc(t('next'))}</button>`
+    : `<button class="btn pri" data-act="finishOnb">${esc(t('finish'))}</button>`;
+  return {title: t('step_of', {n}), noNav: true,
+    html: `${dots}<div class="card">${body}</div><div class="stack" style="margin-top:16px">${nextBtn}
+      <button class="btn ghost" data-act="finishOnb">${esc(t('skip'))}</button></div>`};
+}
+
+function currentItems() {
+  const first = ITEMS.findIndex(i => !S.done.includes(i.id));
+  if (first < 0) return [];
+  return ITEMS.slice(first, first + S.lessons);
+}
+function secOf(it) { return C.toc.find(s => s.no === it.sec); }
+
+function vToday() {
+  const cur = currentItems();
+  const isL10 = cur[0] === L10;
+  const doneN = S.done.length, total = ITEMS.length;
+  const sec = cur[0] ? secOf(cur[0]) : null;
+  const stds = [...new Set(cur.flatMap(i => i.std || []))];
+  let topics = cur.map(it => `
+    <div style="margin-top:12px">
+      <div class="topic-title">${esc(topicLabel(it))}</div>
+      <div class="pages" style="margin-top:4px"><span>${esc(t('tb_pages', {part: it.part, pages: it.pages}))}</span>${it.wb ? `<span>${esc(t('wb_pages', {p: it.wb}))}</span>` : ''}</div>
+    </div>`).join('');
+  const gradeNote = S.grade !== 1 || S.sector !== 'ru' ? `<div class="note">${esc(t('demo_scope'))}</div>` : '';
+  const actions = isL10
+    ? `<button class="btn pri" data-go="/pack">${I.slides}${esc(t('open_pack'))}</button>
+       ${S.lessons === 2 && cur[1] ? `<button class="btn" data-go="/topic/${cur[1].id}">${esc(t('open_pack_n', {n: cur[1].no}))}</button>` : ''}
+       <button class="btn ok" data-act="topicDone">${I.check}${esc(t('topic_done'))}</button>`
+    : `<div class="note">${esc(t('pack_stub'))}</div>
+       <button class="btn pri" data-act="undoDone">${esc(t('undo'))}</button>`;
+  return {title: t('nav_today'), tab: 'today', html: `
+    <div class="stack">
+      <div class="row between"><div class="h3">${esc(todayStr())}</div><span class="chip gray">${esc(t('subj_math'))} · ${esc(t('grade_1'))}</span></div>
+      ${gradeNote}
+      <div class="card lesson-card">
+        <div class="eyebrow">${sec ? esc(t('section_n', {n: sec.no})) + ' · ' + esc(secTitle(sec)) : ''}</div>
+        <div class="seg" style="margin-top:12px">
+          <button class="${S.lessons === 1 ? 'on' : ''}" data-act="lessons" data-v="1">${esc(t('lessons_1'))}</button>
+          <button class="${S.lessons === 2 ? 'on' : ''}" data-act="lessons" data-v="2">${esc(t('lessons_2'))}</button>
+        </div>
+        ${topics}
+        ${S.lessons === 2 && isL10 ? `<p class="muted small" style="margin-top:8px">${esc(t('two_lessons_note'))}</p>` : ''}
+        ${stds.length ? `<div class="sep"></div><div class="h3" style="margin-bottom:4px">${esc(t('standards'))}</div>${stdBlock(stds)}` : ''}
+        <div class="stack" style="margin-top:14px">${actions}</div>
+      </div>
+      <div class="card">
+        <div class="row between small"><span>${esc(t('progress', {d: doneN, n: total}))}</span><b>${Math.round(doneN / total * 100)} %</b></div>
+        <div class="progress" style="margin-top:8px"><i style="width:${doneN / total * 100}%"></i></div>
+        <button class="btn ghost" style="margin-top:10px" data-go="/toc">${esc(t('toc_title'))}</button>
+      </div>
+      <div style="text-align:center"><button class="link-btn" data-act="reset">${esc(t('reset'))}</button></div>
+    </div>`};
+}
+
+function secTitle(sec) { return S.lang === 'az' ? sec.az : sec.ru; }
+
+function vToc() {
+  const cur = currentItems().map(i => i.id);
+  let html = `<p class="muted small">${esc(S.lang === 'az' ? C.meta.textbook_az : C.meta.textbook_ru)}</p>`;
+  let part = 0;
+  for (const sec of C.toc) {
+    if (sec.part !== part) { part = sec.part; html += `<div class="part-h">${esc(t('part_n', {n: part}))}</div>`; }
+    html += `<div class="sec"><div class="sec-h">${esc(t('section_n', {n: sec.no}))}. ${esc(secTitle(sec))}</div>`;
+    for (const it of sec.items) {
+      const done = S.done.includes(it.id), today = cur.includes(it.id);
+      const cls = done ? 'done' : today ? 'today' : '';
+      const target = it.full ? '/pack' : '/topic/' + it.id;
+      html += `<button class="trow ${cls}" data-go="${target}"><span class="st">${done ? I.check : ''}</span>
+        <span class="tt">${esc(topicLabel(it))}${today ? ` <span class="chip" style="font-size:12px;padding:2px 8px">${esc(t('today_mark'))}</span>` : ''}</span>
+        <span class="pg">${S.lang === 'az' ? 'səh.' : 'с.'} ${esc(it.pages)}</span>${I.chev}</button>`;
+    }
+    html += `</div>`;
+  }
+  return {title: t('toc_title'), tab: 'toc', html,
+    mount() { const el = document.querySelector('.trow.today'); if (el && window.scrollY === 0) el.scrollIntoView({block: 'center'}); }};
+}
+
+function vTopic(id) {
+  const it = ITEMS.find(i => i.id === id);
+  if (!it) return vToc();
+  if (it.full) return vPack();
+  const done = S.done.includes(it.id);
+  const sec = secOf(it);
+  return {title: topicName(it), tab: 'pack', html: `<div class="stack">
+    <div class="card">
+      <div class="eyebrow">${esc(t('section_n', {n: sec.no}))} · ${esc(secTitle(sec))}</div>
+      <div class="topic-title" style="margin-top:6px">${esc(topicLabel(it))}</div>
+      <div class="pages" style="margin-top:6px"><span>${esc(t('tb_pages', {part: it.part, pages: it.pages}))}</span>${it.wb ? `<span>${esc(t('wb_pages', {p: it.wb}))}</span>` : ''}</div>
+      ${done ? `<div style="margin-top:10px"><span class="chip ok">${I.check.replace('<svg', '<svg width="14" height="14"')} ${esc(t('done'))}</span></div>` : ''}
+      ${it.std ? `<div class="sep"></div>${stdBlock(it.std)}` : ''}
+    </div>
+    <div class="note">${esc(t('pack_stub'))}</div>
+    <button class="btn pri" data-go="/pack">${esc(t('open_l10'))}</button></div>`};
+}
+
+function lessonHead() {
+  const Ls = C.lesson;
+  return `<div class="card">
+    <div class="eyebrow">${esc(t('subj_math'))} · ${esc(t('grade_1'))}</div>
+    <div class="topic-title" style="margin-top:4px">${esc(Ls.no)}. ${esc(S.lang === 'az' ? Ls.topic_az : Ls.topic_ru)}</div>
+    <div class="pages" style="margin-top:4px"><span>${esc(t('tb_pages', {part: Ls.part, pages: Ls.pages}))}</span><span>${esc(t('wb_pages', {p: Ls.workbook_pages}))}</span></div>
+    <div class="wrap-row" style="margin-top:8px">${Ls.standards.map(c => `<span class="chip">${esc(c)}</span>`).join('')}</div>
+  </div>${S.lang === 'az' ? `<div class="note blue">${esc(t('az_note'))}</div>` : ''}`;
+}
+
+function vPack() {
+  const tiles = [
+    ['а', 'plan', '/pack/plan', '#3b82f6', I.plan],
+    ['б', 'slides', '/pack/slides', '#8e5cd9', I.slides],
+    ['в', 'ws', '/pack/ws', '#0f9b9b', I.ws],
+    ['г', 'cards', '/pack/cards', '#f08c2e', I.cards],
+    ['д', 'info', '/pack/info', '#22a06b', I.info],
+    ['е', 'game', '/pack/game', '#e5484d', I.game],
+    ['ж', 'check', '/check/g1', '#1f56c8', I.mso],
+    ['з', 'scan', '/check/g1/scan', '#5b4bc4', I.scan],
+    ['и', 'gaps', '/check/g1/gaps', '#c0392b', I.gaps],
+    ['к', 'dl', '/pack/dl', '#475569', I.dl]
+  ];
+  return {title: t('pack_title'), tab: 'pack', html: `<div class="stack">${lessonHead()}
+    <div class="tiles">${tiles.map(([l, k, go, c, ic]) => `<button class="tile" data-go="${go}">
+      <span class="row" style="width:100%"><span class="ic" style="background:${c}">${ic}</span><span class="letter">${l})</span></span>
+      <b>${esc(t('tile_' + k))}</b><span>${esc(t('tile_' + k + '_sub'))}</span></button>`).join('')}</div></div>`};
+}
+
+function vPlan() {
+  const P = C.lesson.plan;
+  const total = P.stages.reduce((a, s) => a + s.min, 0);
+  const fields = P.fields.map(f => {
+    let v = '';
+    if (f.std) v = stdBlock(f.std) + `<p class="muted xs" style="margin-top:4px">${esc(f.v)}</p>`;
+    else if (f.list) v = `<ul>${f.list.map(x => `<li>${esc(x)}</li>`).join('')}</ul>`;
+    else v = `<div>${esc(f.v)}</div>`;
+    return `<div class="field"><div class="k">${esc(t(f.k))}</div>${v}</div>`;
+  }).join('');
+  const bar = `<div class="timebar">${P.stages.map((s, k) => `<i style="width:${s.min / total * 100}%;background:${STAGE_COL[k]}"></i>`).join('')}</div>`;
+  const stages = P.stages.map((s, k) => `<div class="acc" id="st${k}">
+      <button class="acc-h" data-act="acc" data-v="st${k}"><span class="n" style="background:${STAGE_COL[k]}">${k + 1}</span>
+        <span class="nm">${esc(t(s.st))}</span><span class="mn">${esc(t('min', {n: s.min}))}</span>${I.chev}</button>
+      <div class="acc-b"><div class="form">${esc(s.form)}</div><ul class="steps-list">${s.steps.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div></div>`).join('');
+  const crit = P.criteria.map(c => `<div class="crit"><b>${esc(c.c)}</b><ol>${c.levels.map((l, k) => `<li><b>${['I', 'II', 'III', 'IV'][k]}</b><span>${esc(l)}</span></li>`).join('')}</ol></div>`).join('');
+  return {title: t('plan_title'), tab: 'pack', html: `<div class="stack">
+    <div class="card">${fields}</div>
+    <div class="card">
+      <div class="row between"><div class="h2">${esc(t('plan_course'))}</div><span class="chip">${esc(t('total'))}: ${esc(t('min', {n: total}))}</span></div>
+      ${bar}<p class="muted xs">${esc(t('tap_stage'))}</p>
+      <div style="margin-top:10px">${stages}</div>
+    </div>
+    <div class="card"><div class="h2" style="margin-bottom:10px">${esc(t('plan_criteria'))}</div>${crit}</div>
+    <div class="card"><div class="h2" style="margin-bottom:6px">${esc(t('plan_sources'))}</div><ul style="margin:0;padding-left:20px" class="small">${P.sources.map(s => `<li>${esc(s)}</li>`).join('')}</ul></div>
+  </div>`};
+}
+
+let slideIdx = 0;
+function vSlides() {
+  const sl = C.lesson.slides;
+  return {title: t('slides_title'), tab: 'pack', html: `<div class="slides">
+      <div class="track" id="track">${sl.map((s, i) => `<div class="slide">${slideSvg(s, i)}</div>`).join('')}</div>
+      <div class="slide-ctrl"><button class="icon-btn" data-act="slide" data-v="-1" aria-label="prev">${I.prev}</button>
+        <b id="slideNo"></b><button class="icon-btn" data-act="slide" data-v="1" aria-label="next">${I.next}</button></div>
+      <div class="dots" id="dots">${sl.map(() => '<i></i>').join('')}</div>
+      <button class="btn ok hidden" id="revealBtn" style="margin-top:10px" data-act="revealAll">${I.key}${esc(t('show_answers'))}</button>
+      <p class="muted xs" style="text-align:center;margin-top:6px">${esc(t('swipe'))}</p>
+    </div>
+    <div class="card" style="margin-top:12px"><div class="h3">${esc(t('notes'))}</div><p id="slideNote" class="small" style="margin-top:4px"></p></div>`,
+    mount() {
+      const tr = document.getElementById('track');
+      const upd = () => {
+        const i = Math.round(tr.scrollLeft / tr.clientWidth);
+        slideIdx = Math.max(0, Math.min(sl.length - 1, i));
+        document.getElementById('slideNo').textContent = t('slide_n', {i: slideIdx + 1, n: sl.length});
+        document.getElementById('slideNote').textContent = sl[slideIdx].note;
+        document.querySelectorAll('#dots i').forEach((d, k) => d.classList.toggle('on', k === slideIdx));
+        document.getElementById('revealBtn').classList.toggle('hidden', sl[slideIdx].t !== 'try');
+      };
+      tr.addEventListener('scroll', () => { window.requestAnimationFrame(upd); }, {passive: true});
+      if (slideIdx) tr.scrollLeft = slideIdx * tr.clientWidth;
+      upd();
+    }};
+}
+
+let wsTab = 'A', wsShow = false;
+function itemHtml(it) {
+  const one = it.a && !/[,:·]/.test(it.a) && it.a.length <= 3;
+  let q = it.q ? esc(it.q) : '';
+  let filled = false;
+  if (q && one && (q.includes('◯') || q.includes('▢'))) {
+    q = q.replace(/[◯▢]/, m => `<span class="blank${m === '▢' ? ' box' : ''}"><span class="fill">${esc(it.a)}</span></span>`);
+    filled = true;
+  } else if (q) {
+    q = q.replace(/◯/g, '<span class="blank"></span>').replace(/▢/g, '<span class="blank box"></span>');
+  }
+  const pair = (it.q || '').match(/^(\d+) и (\d+)$/);
+  if (pair && (it.a === pair[1] || it.a === pair[2])) {
+    const n = x => `<span class="circ${x === it.a ? ' yes' : ''}">${x}</span>`;
+    return `<div class="item pair">${n(pair[1])}<span class="muted" style="font-weight:500">и</span>${n(pair[2])}</div>`;
+  }
+  if (it.pic && it.pic.t === 'dots2') {
+    return `<div class="item"><span class="pic">${dotsSvg(it.pic.a, '#e5484d')}</span><span class="blank"><span class="fill">${esc(it.a)}</span></span><span class="pic">${dotsSvg(it.pic.b, '#3b82f6')}</span></div>`;
+  }
+  const raw = it.q || '';
+  const isText = !raw || raw.length > 12 || !!it.pic;
+  const ans = filled ? '' : `<div class="ans">${esc(t('answer_word'))}: ${esc(it.a)}${it.note ? ` <span class="nt">(${esc(it.note)})</span>` : ''}</div>`;
+  return `<div class="item${isText ? ' text' : ''}">${it.pic ? picHtml(it.pic) : ''}${q ? `<span>${q}</span>` : ''}${ans}</div>`;
+}
+function tasksHtml(tasks) {
+  return tasks.map((tk, k) => `<div class="task"><div class="task-q"><span class="num">${k + 1}</span><span class="qt">${esc(tk.q)}
+    ${tk.std ? `<span class="chip gray" style="font-size:12px;margin-left:4px">${esc(tk.std)}</span>` : ''}</span></div>
+    <div class="items">${tk.items.map(itemHtml).join('')}</div></div>`).join('');
+}
+function vWS() {
+  const W = C.lesson.worksheets[wsTab];
+  return {title: t('ws_title'), tab: 'pack', html: `<div class="stack">
+    <div class="seg">${['A', 'B', 'C'].map(k => `<button class="${wsTab === k ? 'on' : ''}" data-act="wsTab" data-v="${k}">${esc(t('level_' + k).split(' · ')[0])}</button>`).join('')}</div>
+    <button class="btn ${wsShow ? 'ok' : ''}" data-act="wsShow">${I.key}${esc(t(wsShow ? 'hide_answers' : 'show_answers'))}</button>
+    <div class="card ${wsShow ? 'show-ans' : ''}">
+      <div class="sheet-head"><div class="h2">${esc(t('level_' + wsTab))}</div><span class="muted small">${esc(t('name_line'))}</span></div>
+      <p class="muted small" style="margin-top:2px">${esc(C.lesson.no)}. ${esc(C.lesson.topic_ru)}</p>
+      <div style="margin-top:6px">${tasksHtml(W.tasks)}</div>
+    </div></div>`};
+}
+
+let groupsN = 4, cardsKey = false;
+function vCards() {
+  const cards = C.lesson.cards.slice(0, groupsN);
+  return {title: t('cards_title'), tab: 'pack', html: `<div class="stack">
+    <div class="h3">${esc(t('groups_q'))}</div>
+    <div class="seg">${[2, 3, 4, 5, 6].map(n => `<button class="${groupsN === n ? 'on' : ''}" data-act="groups" data-v="${n}">${n}</button>`).join('')}</div>
+    <button class="btn ${cardsKey ? 'ok' : ''}" data-act="cardsKey">${I.key}${esc(t(cardsKey ? 'hide_answers' : 'show_answers'))}</button>
+    <div class="${cardsKey ? 'show-ans' : ''}">${cards.map((c, k) => `<div class="gcard">
+      <div class="gh" style="background:${COL[c.color]}"><span>${esc(t('group_n', {n: k + 1}))} · ${esc(c.title)}</span><span>${esc(c.std)}</span></div>
+      <div class="gb"><div>${esc(c.q)}</div><div class="ans">${esc(t('key'))}: ${esc(c.a)}</div></div></div>`).join('')}</div>
+  </div>`};
+}
+
+function vInfo() {
+  const G = C.lesson.infographic;
+  return {title: t('info_title'), tab: 'pack', html: `<div class="poster">
+    <div class="row" style="gap:12px"><div style="flex:none">${crocSvg('gt', 64)}</div><div class="h1">${esc(G.title)}</div></div>
+    <div style="margin-top:8px">${G.steps.map(s => `<div class="istep"><span class="bn">${s.n}</span><div class="bd">
+      <div class="h2">${esc(s.title)}</div><div class="small" style="margin-top:2px">${esc(s.text)}</div>
+      <div>${picHtml(s.pic)}</div></div></div>`).join('')}</div>
+    <div class="sep"></div>
+    <div class="h3" style="margin-bottom:8px">${esc(t('signs'))}</div>
+    <div class="signs3">${G.signs.map(s => `<div><b>${esc(s[0])}</b><span class="small">${esc(s[1])}</span></div>`).join('')}</div>
+    <div class="h3" style="margin:12px 0 6px">${esc(t('how_read'))}</div>
+    ${G.read.map(r => `<div class="row" style="padding:4px 0"><b style="font-size:22px;min-width:76px">${esc(r.e)}</b><span class="small">«${esc(r.w)}»</span></div>`).join('')}
+  </div>`};
+}
+
+/* ---------- игра ---------- */
+let G = null;
+function newGame() { G = {i: 0, score: 0, ok: 0, log: [], picked: null, used5050: false, usedHint: false, gone: [], hint: false, state: 'q'}; }
+function vGame() {
+  const Q = C.lesson.quiz, P = C.lesson.quiz_points;
+  let inner;
+  if (!G) {
+    inner = `<div style="text-align:center;padding:10px 0">
+      <div style="display:inline-block;background:#fff;border-radius:20px;padding:10px 14px">${crocSvg('gt', 120)}</div>
+      <div class="h1" style="margin-top:14px">${esc(t('game_title'))}</div>
+      <p class="muted" style="margin:8px 0 18px">${esc(t('game_intro'))}</p>
+      <button class="btn yellow" data-act="gameStart">${esc(t('game_start'))}</button></div>`;
+  } else if (G.state === 'end') {
+    const msg = G.ok >= 9 ? 'game_great' : G.ok >= 6 ? 'game_good' : 'game_try';
+    inner = `<div style="text-align:center;padding:6px 0">
+      <div class="muted">${esc(t('result'))}</div>
+      <div class="score-big pop">${num(G.score)}</div><div class="muted">${esc(t('points'))}</div>
+      <div class="ladder" style="margin:18px 0 8px">${G.log.map(x => `<i class="${x ? 'ok' : 'bad'}"></i>`).join('')}</div>
+      <div class="h2">${esc(t('correct_of', {c: G.ok, n: Q.length}))}</div>
+      <p style="margin:8px 0 18px">${esc(t(msg))}</p>
+      <button class="btn yellow" data-act="gameStart">${esc(t('play_again'))}</button></div>`;
+  } else {
+    const q = Q[G.i], lt = GAME_LT[S.lang] || GAME_LT.ru;
+    const answered = G.picked != null;
+    inner = `<div class="row between"><b>${esc(t('q_of', {i: G.i + 1, n: Q.length}))}</b><b style="color:#ffd34d">${num(G.score)} ${esc(t('points'))}</b></div>
+      <div class="ladder">${Q.map((_, k) => `<i class="${k < G.log.length ? (G.log[k] ? 'ok' : 'bad') : k === G.i ? 'cur' : ''}"></i>`).join('')}</div>
+      <div class="muted small">+${num(P[G.i])} ${esc(t('points'))}</div>
+      <div class="gq">${esc(q.q)}</div>
+      ${q.pic ? `<div class="gpic">${picHtml(q.pic)}</div>` : ''}
+      <div class="gopts">${q.opts.map((o, k) => {
+        let cls = '';
+        if (G.gone.includes(k)) cls = 'gone';
+        if (answered && k === q.a) cls = 'ok';
+        else if (answered && k === G.picked) cls = 'bad';
+        return `<button class="gopt ${cls}" data-act="gameAns" data-v="${k}" ${answered ? 'disabled' : ''}><span class="lt">${lt[k]}</span><span>${esc(o)}</span></button>`;
+      }).join('')}</div>
+      ${G.hint ? `<div class="ghint"><b>${esc(t('hint'))}:</b> ${esc(q.hint)}</div>` : ''}
+      ${answered ? `<div class="gfb pop">${G.picked === q.a ? esc(t('right')) + ` +${num(P[G.i])}` : esc(t('wrong', {a: q.opts[q.a]}))}</div>
+        <button class="btn yellow" style="margin-top:12px" data-act="gameNext">${esc(t(G.i + 1 < Q.length ? 'next_q' : 'to_result'))}</button>`
+      : `<div class="lifes"><button class="life" data-act="game5050" ${G.used5050 ? 'disabled' : ''}>${esc(t('fifty'))}</button>
+          <button class="life" data-act="gameHint" ${G.usedHint ? 'disabled' : ''}>${esc(t('hint'))}</button></div>`}`;
+  }
+  return {title: t('tile_game'), tab: 'pack', html: `<div class="game">${inner}</div>`};
+}
+
+/* ---------- проверка ---------- */
+function checkSwitch(g) {
+  return `<div class="seg wrap2">${['g1', 'g2'].map(k => `<button class="${g === k ? 'on' : ''}" data-act="checkGrade" data-v="${k}">${esc(L(C.checks[k], 'label'))}</button>`).join('')}</div>`;
+}
+function checkHead(g) {
+  const ch = C.checks[g];
+  return `<div class="card"><div class="eyebrow">${esc(L(ch, 'label'))}</div><div class="h2" style="margin-top:4px">${esc(L(ch, 'title'))}</div>
+    <p class="muted small" style="margin-top:4px">${esc(L(ch, 'source'))}</p></div>`;
+}
+function vCheck(g) {
+  g = g || S.checkGrade || 'g1';
+  S.checkGrade = g; save();
+  const ch = C.checks[g];
+  const tiles = [
+    ['tasks', I.mso, '#1f56c8'], ['key', I.key, '#0f9b9b'], ['sheet', I.qr, '#475569'],
+    ['scan', I.scan, '#5b4bc4'], ['gaps', I.gaps, '#c0392b']
+  ];
+  return {title: t('check_title'), tab: 'check', html: `<div class="stack">${checkSwitch(g)}${checkHead(g)}
+    <div class="note${g === 'g2' ? ' blue' : ''}">${esc(L(ch, 'note'))}</div>
+    <div class="tiles">${tiles.map(([k, ic, c]) => `<button class="tile" data-go="/check/${g}/${k}"><span class="ic" style="background:${c}">${ic}</span>
+      <b>${esc(t('c_' + k))}</b><span>${esc(t('c_' + k + '_sub'))}</span></button>`).join('')}</div></div>`};
+}
+function taskBlock(tk, showRight, chip) {
+  const ai = LETTERS_RU.indexOf(tk.a);
+  const q = esc(tk.q).replace(/◯/g, '<span class="blank" style="width:30px;height:30px;min-width:30px"></span>').replace(/▢/g, '<span class="blank box" style="width:30px;height:30px;min-width:30px"></span>');
+  return `<div class="task"><div class="task-q"><span class="num">${tk.n}</span><span class="qt">${q}${chip ? ` <span class="chip gray" style="font-size:12px">${esc(chip)}</span>` : ''}</span></div>
+    ${tk.pic ? `<div style="margin:8px 0 0 40px">${picHtml(tk.pic)}</div>` : ''}
+    <div class="opts3">${tk.opts.map((o, k) => `<span class="${showRight && k === ai ? 'right' : ''}"><b>${letter(k)})</b> ${esc(o)}${showRight && k === ai ? ' ✓' : ''}</span>`).join('')}</div></div>`;
+}
+function vCheckTasks(g) {
+  const ch = C.checks[g];
+  let body = '';
+  if (g === 'g2') {
+    body = ch.criteria.map(c => `<div class="crit-h"><span class="chip">${esc(critLabel(c))}</span><b class="small">${esc(c.ru)}</b></div>
+      ${c.tasks.map(n => taskBlock(ch.tasks[n - 1], false)).join('')}`).join('');
+  } else {
+    const critOf = {};
+    ch.criteria.forEach(c => c.tasks.forEach(n => critOf[n] = c));
+    body = ch.tasks.map(tk => taskBlock(tk, false, critOf[tk.n].std)).join('');
+  }
+  return {title: t('c_tasks'), tab: 'check', html: `<div class="stack">${checkHead(g)}<div class="card">${body}</div>
+    <button class="btn" data-go="/check/${g}/key">${I.key}${esc(t('c_key'))}</button></div>`};
+}
+function vCheckKey(g) {
+  const ch = C.checks[g];
+  const critOf = {};
+  ch.criteria.forEach(c => c.tasks.forEach(n => critOf[n] = c));
+  const grid = `<div class="keygrid">${ch.tasks.map(tk => `<div>№ ${tk.n}<b>${letter(LETTERS_RU.indexOf(tk.a))}</b>${esc(critOf[tk.n].id)}</div>`).join('')}</div>`;
+  const crit = ch.criteria.map(c => `<div class="std"><span class="code">${esc(c.id)}</span><span class="txt"><b>${esc(c.std)}</b> · ${esc(c.ru)}<br>
+    <span class="muted">${esc(stdText(c.std))}</span><br><span class="xs muted">${esc(t('tasks_n', {t: c.tasks.join(', ')}))}</span></span></div>`).join('');
+  let rules = '';
+  if (ch.kind === 'levels') rules = `<div class="note">${esc(L(ch, 'levels_rule'))}</div>`;
+  else rules = `<div class="note blue"><b>${esc(t('mark'))}:</b> ${esc(L(ch, 'marks_rule'))}</div><div class="note"><b>${esc(t('crit_levels'))}:</b> ${esc(L(ch, 'crit_levels_rule'))}</div>`;
+  return {title: t('c_key'), tab: 'check', html: `<div class="stack">${checkHead(g)}<div class="card">${grid}</div>
+    <div class="card"><div class="h3" style="margin-bottom:6px">${esc(t('crit'))}</div>${crit}</div>${rules}
+    <div class="card"><div class="h3">${esc(t('c_tasks'))}</div>${ch.tasks.map(tk => taskBlock(tk, true)).join('')}</div></div>`};
+}
+function qrSvg(q) { return `<svg viewBox="0 0 ${q.size} ${q.size}" shape-rendering="crispEdges" aria-label="QR"><rect width="${q.size}" height="${q.size}" fill="#fff"/><path d="${q.d}" fill="#000"/></svg>`; }
+function vCheckSheet(g) {
+  const ch = C.checks[g], n = ch.tasks.length;
+  const rows = ch.tasks.map(tk => `<div class="brow"><span class="bn">${tk.n}</span>${tk.opts.map((_, k) => `<i>${letter(k)}</i>`).join('')}</div>`).join('');
+  return {title: t('c_sheet'), tab: 'check', html: `<div class="stack">
+    <div class="paper">
+      <div class="paper-top"><div style="min-width:0;flex:1"><div class="h3">${esc(t('sheet_title'))}</div>
+        <div class="xs muted">${esc(L(ch, 'label'))}<br>${esc(L(ch, 'title'))}</div>
+        <div class="fill-line" style="margin-top:8px">${esc(t('sheet_name'))}:</div><div class="fill-line">${esc(t('sheet_class'))}:</div></div>
+        <div class="qr">${qrSvg(ch.qr_svg)}</div></div>
+      <div class="bubbles ${n > 10 ? 'two' : ''}" style="${n > 10 ? `grid-template-rows:repeat(${Math.ceil(n / 2)},auto)` : ''}">${rows}</div>
+      <p class="xs muted" style="margin-top:12px">${esc(t('sheet_hint'))}</p>
+    </div>
+    <button class="btn" data-act="dl">${I.print}${esc(t('review_print'))}</button>
+    <button class="btn pri" data-go="/check/${g}/scan">${I.scan}${esc(t('c_scan'))}</button></div>`};
+}
+
+let scanTimer = null, openRow = '';
+function vScan(g) {
+  const ch = C.checks[g];
+  if (!S.scanned[g]) {
+    return {title: t('c_scan'), tab: 'check', html: `<div class="stack">${checkHead(g)}
+      <div class="scan-box" id="scanBox"><div class="sheet"><div class="qrm"></div></div><div class="frame"></div></div>
+      <p class="small">${esc(t('scan_intro'))}</p>
+      <button class="btn pri" data-act="scan" data-v="${g}" id="scanBtn">${I.scan}${esc(t('scan_btn'))}</button></div>`};
+  }
+  const rs = results(g), n = rs.length;
+  let summary, head, rowsH;
+  if (ch.kind === 'levels') {
+    const avg = rs.reduce((a, r) => a + r.correct, 0) / n;
+    summary = `<div class="kpis"><div class="kpi"><span class="xs muted">${esc(t('avg_correct'))}</span><b>${dec(avg)} ${esc(t('of'))} ${ch.tasks.length}</b><span class="xs muted">${pct(avg / ch.tasks.length)}</span></div>
+      <div class="kpi"><span class="xs muted">${esc(t('students_n'))}</span><b>${n}</b></div></div>
+      <div class="dist" style="margin-top:12px">${ch.levels.map(l => { const c = rs.filter(r => r.level === l).length;
+        return `<span class="badge lv-${l.c}">${esc(l[S.lang] || l.ru)}</span><div class="bar"><i style="width:${c / n * 100}%;background:${COL[l.c]}"></i></div><b>${c}</b>`; }).join('')}</div>`;
+    head = `<div class="res-h"><span>№</span><span>${esc(t('student'))}</span><span style="text-align:center">${esc(t('right_n'))}</span><span style="text-align:center">${esc(t('level'))}</span></div>`;
+    rowsH = rs.map(r => `<button class="res-r" data-act="row" data-v="${g}:${r.i}"><span class="muted">${r.i + 1}</span><span class="nm">${esc(r.name)}</span>
+      <span class="num">${r.correct}/${ch.tasks.length}</span><span style="text-align:center"><span class="badge lvl lv-${r.level.c}">${esc(r.level[S.lang] || r.level.ru)}</span></span></button>${detHtml(g, r)}`).join('');
+  } else {
+    const avg = rs.reduce((a, r) => a + r.points, 0) / n;
+    const cnt = m => rs.filter(r => r.mark === m).length;
+    summary = `<div class="kpis"><div class="kpi"><span class="xs muted">${esc(t('avg_points'))}</span><b>${dec(avg)}</b><span class="xs muted">/ 100</span></div>
+      <div class="kpi"><span class="xs muted">${esc(t('quality'))}</span><b>${pct((cnt(5) + cnt(4)) / n)}</b><span class="xs muted">«5» + «4»</span></div>
+      <div class="kpi"><span class="xs muted">${esc(t('success'))}</span><b>${pct((n - cnt(2)) / n)}</b><span class="xs muted">${esc(t('mark'))} ≥ «3»</span></div>
+      <div class="kpi"><span class="xs muted">${esc(t('students_n'))}</span><b>${n}</b></div></div>
+      <div class="dist" style="margin-top:12px">${[5, 4, 3, 2].map(m => `<span class="badge m${m}">«${m}»</span><div class="bar"><i style="width:${cnt(m) / n * 100}%;background:${{5: '#22a06b', 4: '#3b82f6', 3: '#f2b705', 2: '#e5484d'}[m]}"></i></div><b>${cnt(m)}</b>`).join('')}</div>`;
+    head = `<div class="res-h"><span>№</span><span>${esc(t('student'))}</span><span style="text-align:center">${esc(t('points100'))}</span><span style="text-align:center">${esc(t('mark'))}</span></div>`;
+    rowsH = rs.map(r => `<button class="res-r" data-act="row" data-v="${g}:${r.i}"><span class="muted">${r.i + 1}</span><span class="nm">${esc(r.name)}</span>
+      <span class="num">${r.points}</span><span style="text-align:center"><span class="badge m${r.mark}">«${r.mark}»</span></span></button>${detHtml(g, r)}`).join('');
+  }
+  return {title: t('c_scan'), tab: 'check', html: `<div class="stack">${checkHead(g)}
+    <div class="card"><div class="h2" style="margin-bottom:10px">${esc(t('class_total'))}</div>${summary}</div>
+    <div class="row between"><div class="h2">${esc(t('results'))}</div><span class="xs muted" style="text-align:right">${esc(t('tap_row'))}</span></div>
+    <div class="res${ch.kind === 'levels' ? ' lv' : ''}" id="resTable">${head}${rowsH}</div>
+    <button class="btn pri" data-go="/check/${g}/gaps">${I.gaps}${esc(t('c_gaps'))}</button>
+    <button class="btn ghost" data-act="rescan" data-v="${g}">${esc(t('rescan'))}</button></div>`};
+}
+function detHtml(g, r) {
+  const ch = C.checks[g];
+  const cells = r.per.map((ok, j) => `<span class="${ok ? 'y' : 'n'}">${j + 1}${letter(LETTERS_RU.indexOf(r.ans[j]))}</span>`).join('');
+  let crit = '';
+  if (ch.kind === 'marks') {
+    crit = `<div><b>${esc(t('by_crit'))}:</b> ${ch.criteria.map((c, k) => `${esc(c.id)} — ${r.critPts[k]}`).join(' · ')}
+      → ${esc(t('avg'))} ${dec(r.critAvg)} → <b>${esc(r.critLevel)}</b></div>`;
+  } else {
+    crit = `<div><b>${esc(t('by_crit'))}:</b> ${r.crit.map(c => `${esc(c.id)} — ${c.ok}/${c.of}`).join(' · ')}</div>`;
+  }
+  return `<div class="det ${openRow === g + ':' + r.i ? 'open' : ''}" id="det${r.i}"><div class="cells">${cells}</div>${crit}</div>`;
+}
+function vGaps(g) {
+  const ch = C.checks[g], gs = gaps(g).sort((a, b) => b.wrong - a.wrong), n = C.students.length;
+  return {title: t('gaps_title'), tab: 'check', html: `<div class="stack">${checkHead(g)}
+    <p class="small muted">${esc(t('gaps_intro'))}</p>
+    ${gs.map(x => `<div class="card">
+      <div class="row between" style="align-items:flex-start"><span class="chip">${esc(critLabel(x.c))}</span>
+        ${ch.kind === 'marks' ? `<span class="xs muted" style="text-align:right">${esc(t('class_level'))}: <b>${esc(x.lvl)}</b> (${dec(x.avg)})</span>` : ''}</div>
+      <div class="h3" style="margin-top:8px">${esc(x.c.ru)}</div>
+      <p class="xs muted" style="margin-top:2px">${esc(stdText(x.c.std))}</p>
+      <div class="bar" style="margin-top:10px"><i style="width:${x.wrong / n * 100}%;background:${x.wrong / n > .4 ? '#e5484d' : x.wrong / n > .2 ? '#f08c2e' : '#22a06b'}"></i></div>
+      <div class="row between small" style="margin-top:6px"><b>${esc(t('gaps_wrong', {n: x.wrong, m: n}))}</b><span class="muted">${esc(t('tasks_n', {t: x.c.tasks.join(', ')}))}</span></div>
+      <button class="btn" style="margin-top:10px" data-go="/check/${g}/review/${x.c.id}" ${x.wrong ? '' : 'disabled'}>${I.ws}${esc(t('review_btn'))}</button>
+    </div>`).join('')}</div>`};
+}
+let revShow = false;
+function vReview(g, id) {
+  const ch = C.checks[g], c = ch.criteria.find(x => x.id === id);
+  if (!c) return vGaps(g);
+  const gp = gaps(g).find(x => x.c.id === id);
+  const items = ch.review[id];
+  return {title: t('review_title'), tab: 'check', html: `<div class="stack">
+    <div class="card"><div class="eyebrow">${esc(L(ch, 'label'))}</div><div class="h2" style="margin-top:4px">${esc(t('review_title'))}: ${esc(c.ru)}</div>
+      ${stdBlock([c.std])}</div>
+    <div class="card"><div class="h3" style="margin-bottom:8px">${esc(t('review_for', {n: gp.who.length}))}</div>
+      <div class="names">${gp.who.map(r => `<span>${esc(r.name)}</span>`).join('')}</div></div>
+    <button class="btn ${revShow ? 'ok' : ''}" data-act="revShow">${I.key}${esc(t(revShow ? 'hide_answers' : 'show_answers'))}</button>
+    <div class="card ${revShow ? 'show-ans' : ''}"><div class="sheet-head"><div class="h3">${esc(t('review_title'))} · ${esc(c.id)}</div><span class="muted small">${esc(t('name_line'))}</span></div>
+      ${items.map((it, k) => `<div class="task"><div class="task-q"><span class="num">${k + 1}</span><div class="qt" style="font-weight:600">${itemHtml(it)}</div></div></div>`).join('')}
+    </div>
+    <button class="btn" data-act="dl">${I.print}${esc(t('review_print'))}</button></div>`};
+}
+
+function vDl() {
+  const cls = {Word: 'word', PDF: 'pdf', PowerPoint: 'ppt', PNG: 'png', link: 'link'};
+  return {title: t('dl_title'), tab: 'pack', html: `<div class="stack">${lessonHead()}<div class="card">
+    ${C.lesson.downloads.map(d => `<div class="dl-row"><span class="nm">${esc(d[S.lang] || d.ru)}</span><span class="fm">
+      ${d.fmt.map(f => `<button class="fmt ${cls[f]}" data-act="${f === 'link' ? 'dlLink' : 'dl'}">${esc(f === 'link' ? t('dl_link') : f)}</button>`).join('')}</span></div>`).join('')}
+  </div></div>`};
+}
+
+/* ---------- маршруты ---------- */
+const ROUTES = [
+  [/^\/onb\/([123])$/, vOnb],
+  [/^\/today$/, vToday],
+  [/^\/toc$/, vToc],
+  [/^\/topic\/(t\d+)$/, vTopic],
+  [/^\/pack$/, vPack],
+  [/^\/pack\/plan$/, vPlan],
+  [/^\/pack\/slides$/, vSlides],
+  [/^\/pack\/ws$/, vWS],
+  [/^\/pack\/cards$/, vCards],
+  [/^\/pack\/info$/, vInfo],
+  [/^\/pack\/game$/, vGame],
+  [/^\/pack\/dl$/, vDl],
+  [/^\/check$/, () => vCheck()],
+  [/^\/check\/(g[12])$/, vCheck],
+  [/^\/check\/(g[12])\/tasks$/, vCheckTasks],
+  [/^\/check\/(g[12])\/key$/, vCheckKey],
+  [/^\/check\/(g[12])\/sheet$/, vCheckSheet],
+  [/^\/check\/(g[12])\/scan$/, vScan],
+  [/^\/check\/(g[12])\/gaps$/, vGaps],
+  [/^\/check\/(g[12])\/review\/(K\d)$/, vReview]
+];
+function parentOf(p) {
+  let m;
+  if ((m = p.match(/^\/onb\/(\d)$/))) return '/onb/' + Math.max(1, +m[1] - 1);
+  if (p === '/today') return '/onb/3';
+  if (p === '/toc' || p === '/pack' || p === '/check') return '/today';
+  if (p.startsWith('/topic/')) return '/toc';
+  if (p.startsWith('/pack/')) return '/pack';
+  if ((m = p.match(/^\/check\/(g[12])\/review\//))) return '/check/' + m[1] + '/gaps';
+  if ((m = p.match(/^\/check\/(g[12])\//))) return '/check/' + m[1];
+  if (/^\/check\/g[12]$/.test(p)) return '/today';
+  return '/today';
+}
+const appEl = document.getElementById('app');
+let stack = [], lastPath = '';
+function curPath() { const h = location.hash.slice(1); return h || (S.onb ? '/today' : '/onb/1'); }
+function go(p) { if (curPath() === p && location.hash) render(); else location.hash = p; }
+function render() {
+  const p = curPath();
+  let view = null;
+  for (const [re, fn] of ROUTES) { const m = p.match(re); if (m) { view = fn(...m.slice(1)); break; } }
+  if (!view) view = vToday();
+  document.documentElement.lang = S.lang === 'az' ? 'az' : 'ru';
+  document.title = (S.lang === 'az' ? 'Urokum — demo' : 'Урокум — демо');
+  document.getElementById('hdrTitle').textContent = view.title;
+  document.getElementById('demoPill').textContent = t('demo');
+  document.getElementById('backBtn').setAttribute('aria-label', t('back'));
+  document.getElementById('langRu').classList.toggle('on', S.lang === 'ru');
+  document.getElementById('langAz').classList.toggle('on', S.lang === 'az');
+  ['Today', 'Toc', 'Pack', 'Check'].forEach(k => document.getElementById('nav' + k).textContent = t('nav_' + k.toLowerCase()));
+  document.querySelectorAll('.nav [data-tab]').forEach(b => b.classList.toggle('on', b.dataset.tab === view.tab));
+  document.getElementById('nav').classList.toggle('hidden', !!view.noNav);
+  appEl.classList.toggle('no-nav', !!view.noNav);
+  appEl.innerHTML = view.html;
+  if (p !== lastPath) { window.scrollTo(0, 0); lastPath = p; }
+  if (view.mount) view.mount();
+}
+window.addEventListener('hashchange', () => {
+  const p = curPath();
+  if (stack.length > 1 && stack[stack.length - 2] === p) stack.pop();
+  else if (stack[stack.length - 1] !== p) stack.push(p);
+  if (scanTimer) { clearInterval(scanTimer); scanTimer = null; }
+  render();
+});
+
+/* ---------- действия ---------- */
+function toast(msg) {
+  const L = document.getElementById('layer');
+  L.innerHTML = `<div class="toast" role="status">${esc(msg)}</div>`;
+  clearTimeout(toast.tm);
+  toast.tm = setTimeout(() => { L.innerHTML = ''; }, 3200);
+}
+function modal(msg) {
+  document.getElementById('layer').innerHTML = `<div class="modal" data-act="closeModal"><div class="box" role="dialog">
+    <div class="row" style="gap:12px;align-items:flex-start"><span class="ic" style="flex:none;width:44px;height:44px;border-radius:12px;background:var(--pri-soft);color:var(--pri);display:grid;place-items:center">${I.dl}</span>
+    <p style="padding-top:8px">${esc(msg)}</p></div><button class="btn pri" style="margin-top:16px" data-act="closeModal">${esc(t('ok'))}</button></div></div>`;
+}
+const ACT = {
+  back() {
+    const p = curPath();
+    if (stack.length > 1) history.back();
+    else { const par = parentOf(p); stack = [par]; location.replace('#' + par); }
+  },
+  lang(el) { S.lang = el.dataset.v; save(); render(); },
+  sector(el) { S.sector = el.dataset.v; S.lang = el.dataset.v; save(); render(); },
+  grade(el) { S.grade = +el.dataset.v; save(); render(); },
+  subj(el) { const v = el.dataset.v; S.subjects = S.subjects.includes(v) ? S.subjects.filter(x => x !== v) : S.subjects.concat(v); save(); render(); },
+  finishOnb() { S.onb = true; save(); go('/today'); },
+  lessons(el) { S.lessons = +el.dataset.v; save(); render(); },
+  topicDone() {
+    const cur = currentItems();
+    cur.forEach(i => { if (!S.done.includes(i.id)) S.done.push(i.id); });
+    save();
+    const nx = currentItems()[0];
+    render();
+    if (nx) toast(t('toast_done', {t: topicLabel(nx)}));
+  },
+  undoDone() { S.done = ITEMS.slice(0, L10_IDX).map(i => i.id); save(); render(); },
+  reset() {
+    const lang = S.lang;
+    Object.assign(S, JSON.parse(JSON.stringify(DEF)), {lang});
+    S.done = ITEMS.slice(0, L10_IDX).map(i => i.id);
+    G = null; wsShow = false; cardsKey = false; revShow = false; slideIdx = 0; openRow = '';
+    save(); stack = []; location.hash = '/onb/1';
+  },
+  acc(el) { document.getElementById(el.dataset.v).classList.toggle('open'); },
+  slide(el) { const tr = document.getElementById('track'); tr.scrollBy({left: +el.dataset.v * tr.clientWidth, behavior: 'smooth'}); },
+  reveal(el) { el.classList.toggle('on'); },
+  revealAll() {
+    const sl = document.querySelectorAll('#track .slide')[slideIdx];
+    const gs = sl ? sl.querySelectorAll('.try-g') : [];
+    const allOn = [...gs].every(g => g.classList.contains('on'));
+    gs.forEach(g => g.classList.toggle('on', !allOn));
+  },
+  wsTab(el) { wsTab = el.dataset.v; render(); },
+  wsShow() { wsShow = !wsShow; render(); },
+  groups(el) { groupsN = +el.dataset.v; render(); },
+  cardsKey() { cardsKey = !cardsKey; render(); },
+  revShow() { revShow = !revShow; render(); },
+  gameStart() { newGame(); render(); },
+  gameAns(el) {
+    if (!G || G.picked != null) return;
+    const k = +el.dataset.v, q = C.lesson.quiz[G.i];
+    G.picked = k;
+    const ok = k === q.a;
+    G.log.push(ok);
+    if (ok) { G.ok++; G.score += C.lesson.quiz_points[G.i]; }
+    render();
+  },
+  game5050() {
+    if (!G || G.used5050) return;
+    const q = C.lesson.quiz[G.i];
+    const wrong = q.opts.map((_, k) => k).filter(k => k !== q.a);
+    wrong.sort(() => Math.random() - .5);
+    G.gone = wrong.slice(0, 2); G.used5050 = true; render();
+  },
+  gameHint() { if (!G || G.usedHint) return; G.hint = true; G.usedHint = true; render(); },
+  gameNext() {
+    if (G.i + 1 >= C.lesson.quiz.length) G.state = 'end';
+    else { G.i++; G.picked = null; G.gone = []; G.hint = false; }
+    render();
+  },
+  checkGrade(el) {
+    S.checkGrade = el.dataset.v; save();
+    const np = curPath().replace(/g[12]/, el.dataset.v).replace(/^\/check$/, '/check/' + el.dataset.v);
+    stack[stack.length - 1] = np;
+    location.replace('#' + np);
+  },
+  scan(el) {
+    const g = el.dataset.v, n = C.students.length;
+    const box = document.getElementById('scanBox');
+    el.disabled = true;
+    box.insertAdjacentHTML('beforeend', `<div class="line"></div><div class="cnt" id="scanCnt">${esc(t('scanning'))}</div>`);
+    let i = 0;
+    scanTimer = setInterval(() => {
+      i++;
+      const c = document.getElementById('scanCnt');
+      if (c) c.textContent = t('checked', {i, n});
+      if (i >= n) { clearInterval(scanTimer); scanTimer = null; setTimeout(() => { S.scanned[g] = true; save(); render(); }, 350); }
+    }, 110);
+  },
+  rescan(el) { S.scanned[el.dataset.v] = false; openRow = ''; save(); render(); },
+  row(el) {
+    const key = el.dataset.v;
+    const d = document.getElementById('det' + key.split(':')[1]);
+    const was = openRow === key;
+    document.querySelectorAll('.det.open').forEach(x => x.classList.remove('open'));
+    openRow = was ? '' : key;
+    if (!was && d) d.classList.add('open');
+  },
+  dl() { modal(t('dl_toast')); },
+  dlLink() { modal(t('dl_link_toast')); },
+  closeModal(el, e) { if (e.target === el || el.tagName === 'BUTTON') document.getElementById('layer').innerHTML = ''; }
+};
+document.addEventListener('click', e => {
+  const el = e.target.closest('[data-go],[data-act]');
+  if (!el || el.disabled) return;
+  if (el.dataset.go) { e.preventDefault(); go(el.dataset.go); return; }
+  const fn = ACT[el.dataset.act];
+  if (fn) fn(el, e);
+});
+document.addEventListener('keydown', e => {
+  if (!document.getElementById('track')) return;
+  if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+    const tr = document.getElementById('track');
+    tr.scrollBy({left: (e.key === 'ArrowRight' ? 1 : -1) * tr.clientWidth, behavior: 'smooth'});
+  }
+});
+
+/* ---------- старт ---------- */
+if (!location.hash) history.replaceState(null, '', '#' + curPath());
+stack = [curPath()];
+render();
+</script>
+</body>
+</html>
